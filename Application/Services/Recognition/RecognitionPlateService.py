@@ -2,8 +2,8 @@ from Domain.Interfaces.Services.Recognition.IRecognitionPlateService import IRec
 from Application.Utils.Images.ImageConvertUtils import ImageConvertUtils
 from ultralytics import YOLO
 import easyocr
-import cv2, os
-from PIL import Image
+import os
+
 
 class RecognitionPlateService(IRecognitionPlateService):
     __dictCharToInt = { 'O': '0',

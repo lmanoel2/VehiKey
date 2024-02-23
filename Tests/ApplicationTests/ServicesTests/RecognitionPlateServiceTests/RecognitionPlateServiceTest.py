@@ -1,7 +1,7 @@
-import pytest
 import cv2
 import os
 from Application.Services.Recognition.RecognitionPlateService import RecognitionPlateService
+
 
 def test_get_text_plate_old_from_image():
     # Arrange
@@ -11,7 +11,7 @@ def test_get_text_plate_old_from_image():
     recognition_plate_service = RecognitionPlateService()
 
     # Act
-    plateText =  recognition_plate_service.GetTextPlateFromImage(image)
+    plateText = recognition_plate_service.GetTextPlateFromImage(image)
 
     # Assert
     assert plateText == 'LPM9710'
