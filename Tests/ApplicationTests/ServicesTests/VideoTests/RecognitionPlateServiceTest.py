@@ -1,7 +1,7 @@
 import cv2
 import os
 import pytest
-from Application.Services.Recognition.RecognitionPlateService import RecognitionPlateService
+from Application.Services.Video.RecognitionPlateService import RecognitionPlateService
 
 parentDirectoryTest = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
