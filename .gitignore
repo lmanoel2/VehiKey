@@ -158,3 +158,42 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+
+
+
+**/.sonarlint
+
+# ---- Build related
+.gradle/
+build/
+out/
+target/
+**/*.class
+
+# ---- IntellijIDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# ---- Eclipse
+.classpath
+.project
+.settings
+
+# ---- Mac OS X
+.DS_Store
+Icon?
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# ---- Windows
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini

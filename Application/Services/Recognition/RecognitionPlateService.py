@@ -6,19 +6,20 @@ import os
 
 
 class RecognitionPlateService(IRecognitionPlateService):
-    __dictCharToInt = { 'O': '0',
-                        'I': '1',
-                        'J': '3',
-                        'A': '4',
-                        'G': '6',
-                        'S': '5'}
+    __dictCharToInt = {'O': '0',
+                       'I': '1',
+                       'J': '3',
+                       'A': '4',
+                       'G': '6',
+                       'S': '5'}
 
-    __dictIntToChar = { '0': 'O',
-                        '1': 'I',
-                        '3': 'J',
-                        '4': 'A',
-                        '6': 'G',
-                        '5': 'S'}
+    __dictIntToChar = {'0': 'O',
+                       '1': 'I',
+                       '3': 'J',
+                       '4': 'A',
+                       '6': 'G',
+                       '5': 'S'}
+
     def GetTextPlateFromImage(self, carImage):
         carImage = ImageConvertUtils.SetImageToRgb(carImage)
         plates = self.__GetLicensePlates(carImage)
@@ -33,17 +34,18 @@ class RecognitionPlateService(IRecognitionPlateService):
             licensePlateCrop = carImage[y1:y2, x1:x2, :]
             licensePlateCrop = ImageConvertUtils.SetImageToGray(licensePlateCrop)
             licensePlateCrop = ImageConvertUtils.ApplyThreshold(licensePlateCrop)
+
             licensePlateText, licensePlateScore = self.__ReadLicensePlate(self, licensePlateCrop)
+            return licensePlateText, licensePlateScore
 
-            return licensePlateText
-
-        return None
+        return None, None
 
     @staticmethod
     def __GetLicensePlates(carImage):
         parentDirectoryTest = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
         directoryModelYolo = os.path.join(parentDirectoryTest, 'Utils', 'Files', 'Models', 'license_plate_detector.pt')
         modelLicensePlate = YOLO(directoryModelYolo)
+
         return modelLicensePlate(carImage)[0]
 
     @staticmethod
