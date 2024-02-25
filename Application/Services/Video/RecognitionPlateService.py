@@ -1,4 +1,4 @@
-from Domain.Interfaces.Services.Recognition.IRecognitionPlateService import IRecognitionPlateService
+from Domain.Interfaces.Services.Video.IRecognitionPlateService import IRecognitionPlateService
 from Application.Utils.Images.ImageConvertUtils import ImageConvertUtils
 from ultralytics import YOLO
 import easyocr
