@@ -1,21 +1,7 @@
 
-k
-;Application/Services/Recognition/RecognitionPlateService.py,9\0\903b66904a4ccd292702783087219474b4fb3613
-r
-BDomain/Interfaces/Services/Recognition/IRecognitionPlateService.py,a\2\a29525f565a3415db3e6fa7352491165d7392667
 :
 
 Startup.py,7\3\731ae14088586a029fc85a84c6dfdb01f55769be
-ê
-`Tests/ApplicationTests/ServicesTests/RecognitionPlateServiceTests/RecognitionPlateServiceTest.py,1\5\159becc44fced8cd6a0fdd882b9aba84c36d23bb
-Å
-Q.idea/sonarlint/securityhotspotstore/9/0/903b66904a4ccd292702783087219474b4fb3613,4\f\4f47587bf2185a371030003f7341bc4afa22450b
-Å
-Q.idea/sonarlint/securityhotspotstore/1/5/159becc44fced8cd6a0fdd882b9aba84c36d23bb,1\b\1ba0fc75dfbe508e566224fd6752c821dfe40490
-w
-G.idea/sonarlint/issuestore/a/2/a29525f565a3415db3e6fa7352491165d7392667,3\3\334e70197aba957e45284c436faef2b750c6d6ce
-Å
-Q.idea/sonarlint/securityhotspotstore/a/2/a29525f565a3415db3e6fa7352491165d7392667,d\a\da04bf08aeebeb11a79366598d99010114a847fd
 w
 G.idea/sonarlint/issuestore/7/3/731ae14088586a029fc85a84c6dfdb01f55769be,0\3\03ea1a48d5bf7d06b0fbc271e3bf1ab3cbddbec9
 Å
@@ -255,3 +241,23 @@ Q.idea/sonarlint/securityhotspotstore/2/0/20277c8b08b3049ace49a8d532c65a94b94408
 Q.idea/sonarlint/securityhotspotstore/2/f/2f671148536fa347746e7f91a54dc089a45bd9f1,0\1\01dba553f80e866220426f4251918470d2196bcf
 Å
 Q.idea/sonarlint/securityhotspotstore/2/3/236143cf0b75dbb5c03f206d5c2a2e847e41a2bc,f\2\f20a548499d2682291b7a9d2183852a6804c07d5
+e
+5Application/Services/Video/RecognitionPlateService.py,5\9\59e2c44aaf466672a21c8c78226b24973a33bad1
+~
+NTests/ApplicationTests/ServicesTests/VideoTests/RecognitionPlateServiceTest.py,e\f\ef23ab6f1d71b1723fd992f4956a8d34a1bcee9a
+l
+<Domain/Interfaces/Services/Video/IRecognitionPlateService.py,8\1\81f32984261e523eded653615913ecd5bea01c68
+[
++Application/Services/Video/CameraService.py,0\d\0d32dfc84146b3da4dffe8023e63f72770914c58
+b
+2Domain/Interfaces/Services/Video/ICameraService.py,0\3\031e7fdafd0bf8278f3d184bed15e68f858fc047
+t
+DTests/ApplicationTests/ServicesTests/VideoTests/CameraServiceTest.py,9\a\9ae8301f2dd6acd885c2fc3dd0656ab2ec0eccb7
+J
+Domain/Entities/Vehicle.py,c\b\cb53766d686299cbdb26c3e1323683ac1329b004
+I
+Domain/Entities/Camera.py,9\d\9da27306bf88e4fcb60bbbc699a1cc96f4614f57
+\
+,Domain/Enumerators/Recognition/YoloModels.py,b\2\b2c7f9cba7fb6bcd3ef8c1b8f3bb544348963248
+j
+:Tests/ApplicationTests/ServicesTests/VideoTests/yolov8n.pt,3\1\3119ac1456b57bbb512fbf52443f908fa9dd3766
