@@ -10,7 +10,7 @@ class CameraService(ICameraService):
     def StartStream(self, camera: Camera):
         print("Starting video stream...")
         rtsp_url = f'rtsp://{camera.user}:{camera.password}@{camera.ip}:554/cam/realmonitor?channel=1&subtype=0'
-        cocoModel = YOLO('yolov8n.pt')
+        model = YOLO('yolov8n.pt')
         vehicles = [YoloModels.MOTORCYCLE.value, YoloModels.BUS.value, YoloModels.CAR.value, YoloModels.TRUCK.value, YoloModels]
         frameCount = -1
 
@@ -24,14 +24,14 @@ class CameraService(ICameraService):
             ret, frame = cap.read()
 
             if not ret:
-                print("Erro ao receber o frame")
+                print("Error receiving frame")
                 break
 
             frameCount += 1
             if ret and frameCount > self.maxFrame:
                 frameCount = 0
 
-                detectionsVehicles = cocoModel(frame)[0]
+                detectionsVehicles = model(frame, verbose = False)[0]
 
                 for detectionsVehicle in detectionsVehicles.boxes.data.tolist():
                     x1, y1, x2, y2, score, class_id = detectionsVehicle
@@ -39,3 +39,9 @@ class CameraService(ICameraService):
                         print(f'vehicle detected {YoloModels(class_id).name} with score {score}')
 
         cap.release()
+
+
+if __name__ == '__main__':
+    camera = Camera('admin', 'admin123', '10.0.0.106')
+    cameraService = CameraService()
+    cameraService.StartStream(camera)
