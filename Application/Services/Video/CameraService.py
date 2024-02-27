@@ -4,20 +4,23 @@ from Domain.Entities.Camera import Camera
 from Domain.Interfaces.Services.Video.ICameraService import ICameraService
 from Domain.Enumerators.Recognition.YoloModels import YoloModels
 
+
 class CameraService(ICameraService):
     maxFrame = 30
 
     def StartStream(self, camera: Camera):
         print("Starting video stream...")
-        rtsp_url = f'rtsp://{camera.user}:{camera.password}@{camera.ip}:554/cam/realmonitor?channel=1&subtype=0'
+
+        vehicles = [YoloModels.MOTORCYCLE.value, YoloModels.BUS.value, YoloModels.CAR.value, YoloModels.TRUCK.value,                    YoloModels]
+        rtspUrl = f'rtsp://{camera.user}:{camera.password}@{camera.ip}:554/cam/realmonitor?channel=1&subtype=0'
         model = YOLO('yolov8n.pt')
-        vehicles = [YoloModels.MOTORCYCLE.value, YoloModels.BUS.value, YoloModels.CAR.value, YoloModels.TRUCK.value, YoloModels]
+
         frameCount = -1
 
-        cap = cv2.VideoCapture(rtsp_url)
+        cap = cv2.VideoCapture(rtspUrl)
 
         if not cap.isOpened():
-            print(f"Unable to connect to camera {rtsp_url}")
+            print(f"Unable to connect to camera {rtspUrl}")
             return
 
         while True:
@@ -31,7 +34,7 @@ class CameraService(ICameraService):
             if ret and frameCount > self.maxFrame:
                 frameCount = 0
 
-                detectionsVehicles = model(frame, verbose = False)[0]
+                detectionsVehicles = model(frame, verbose=False)[0]
 
                 for detectionsVehicle in detectionsVehicles.boxes.data.tolist():
                     x1, y1, x2, y2, score, class_id = detectionsVehicle
