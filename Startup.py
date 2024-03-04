@@ -1,10 +1,15 @@
-from Domain.Entities.Camera import Camera
-from Application.Services.Video.CameraService import CameraService
+from flask import Flask
+
+from Infra.Configs.StartupConfig import RegisterBlueprints
 
 print("Starting...")
 
-camera = Camera('admin', 'admin123', '10.0.0.106')
-cameraService = CameraService()
-cameraService.StartStream(camera)
+app = Flask(__name__)
+RegisterBlueprints(app)
 
-print("Finish")
+if __name__=='__main__':
+    app.run(debug=True)
+
+
+
+

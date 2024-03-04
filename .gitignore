@@ -163,6 +163,8 @@ cython_debug/
 
 
 **/.sonarlint
+*.sonarlint
+.idea/sonarlint/*
 
 # ---- Build related
 .gradle/
