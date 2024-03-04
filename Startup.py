@@ -7,7 +7,7 @@ print("Starting...")
 app = Flask(__name__)
 RegisterBlueprints(app)
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True)
 
 
