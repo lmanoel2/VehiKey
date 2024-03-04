@@ -1,7 +1,7 @@
 import os
 import importlib
 from flask import Blueprint
-from Infra import Controllers
+
 
 def RegisterBlueprints(app):
     parent_dir = os.path.dirname(os.path.abspath(__file__))
