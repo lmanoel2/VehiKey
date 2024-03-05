@@ -1,6 +1,6 @@
 from flask import Flask
 
-from Infra.Configs.StartupConfig import RegisterBlueprints
+from Infra.Configs.Startup.StartupConfig import RegisterBlueprints
 
 print("Starting...")
 
