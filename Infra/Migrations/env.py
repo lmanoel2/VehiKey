@@ -4,8 +4,21 @@ from sqlalchemy import pool
 from alembic import context
 import sys
 import os
+import importlib
+
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir)))
-from Domain.Entities.Vehicle import Base
+from Domain.Entities.Base import Base
+
+parentDirectory = os.path.dirname(os.getcwd())
+entitiesDirectory = os.path.join(parentDirectory, "Domain", "Entities")
+
+# Itera sobre os arquivos no diretório
+for filename in os.listdir(entitiesDirectory):
+    if filename.endswith('.py') and filename != '__init__.py':
+        # Remove a extensão .py do nome do arquivo
+        module_name = filename[:-3]
+        # Importa dinamicamente o módulo
+        module = importlib.import_module(f'Domain.Entities.{module_name}')
 
 config = context.config
 
@@ -13,6 +26,8 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 target_metadata = Base.metadata
+
+
 def run_migrations_offline() -> None:
     url = config.get_main_option("sqlalchemy.url")
     context.configure(

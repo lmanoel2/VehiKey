@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.orm import declarative_base
 from datetime import datetime
-
-Base = declarative_base()
+from .Base import Base
 
 class Vehicle(Base):
     __tablename__ = 'vehicle'
@@ -12,5 +10,4 @@ class Vehicle(Base):
     model = Column(String(20), nullable=True)
     color = Column(String(10), nullable=True)
     plate = Column(String(10), nullable=False)
-
 

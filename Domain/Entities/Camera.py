@@ -1,10 +1,7 @@
 from typing import Any
-
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.orm import declarative_base
 from datetime import datetime
-
-Base = declarative_base()
+from .Base import Base
 
 
 class Camera(Base):
@@ -13,6 +10,7 @@ class Camera(Base):
     created_at = Column(DateTime(timezone=True), default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     ip = Column(String(20), nullable=False)
+    port = Column(Integer, nullable=False)
     password = Column(String(10), nullable=False)
     user = Column(String(10), nullable=False)
     manufacturer = Column(String(20), nullable=False)
