@@ -6,11 +6,13 @@ import sys
 import os
 import importlib
 
-sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir)))
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+sys.path.append(project_dir)
+
 from Domain.Entities.Base import Base
 
-parentDirectory = os.path.dirname(os.getcwd())
-entitiesDirectory = os.path.join(parentDirectory, "Domain", "Entities")
+entitiesDirectory = os.path.abspath(os.path.join(project_dir, 'Domain', 'Entities'))
 
 # Itera sobre os arquivos no diretório
 for filename in os.listdir(entitiesDirectory):
