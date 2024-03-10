@@ -1,4 +1,7 @@
-class CRUDController:
+from Infra.Controllers.BaseController import BaseController
+
+
+class CRUDController(BaseController):
     @staticmethod
     def create():
         pass  # Implemente a lógica de criação aqui
