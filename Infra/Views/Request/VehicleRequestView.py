@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
-class VehicleView(BaseModel):
+class VehicleRequestView(BaseModel):
     color: str
     plate: str

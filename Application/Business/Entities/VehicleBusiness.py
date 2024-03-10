@@ -10,8 +10,6 @@ class VehicleBusiness(CRUDBusiness):
         self.Session.add(model)
         self.Session.commit()
 
-        return 'created'
-
     def __AlreadyExistePlate(self, plate: str):
         alreadyExistPlate = bool(self.Session.query(Vehicle).filter(Vehicle.plate == plate).first())
 
