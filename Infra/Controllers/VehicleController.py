@@ -14,9 +14,8 @@ vehicleBlueprint = Blueprint('vehicle', __name__, url_prefix='/vehicle')
 
 
 class VehicleController(CRUDController):
-
-    @vehicleBlueprint.route('/', methods=['POST'])
     @staticmethod
+    @vehicleBlueprint.route('/', methods=['POST'])
     def Create():
         try:
             service = VehicleService()
@@ -36,8 +35,8 @@ class VehicleController(CRUDController):
         except Exception as e:
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))
 
-    @vehicleBlueprint.route('/')
     @staticmethod
+    @vehicleBlueprint.route('/')
     def Get():
         session = Session()
 
