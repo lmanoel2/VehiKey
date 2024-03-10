@@ -3,17 +3,17 @@ from Infra.Controllers.BaseController import BaseController
 
 class CRUDController(BaseController):
     @staticmethod
-    def create():
-        pass  # Implemente a lógica de criação aqui
+    def Create():
+        raise NotImplementedError()
 
     @staticmethod
-    def read():
-        return 'Read super class'
+    def Get():
+        raise NotImplementedError()
 
     @staticmethod
-    def update():
-        pass  # Implemente a lógica de atualização aqui
+    def Update():
+        raise NotImplementedError()
 
     @staticmethod
-    def delete():
-        return 'Delete super class'
+    def Delete():
+        raise NotImplementedError()
