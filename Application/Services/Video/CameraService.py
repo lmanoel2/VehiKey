@@ -49,7 +49,8 @@ class CameraService(ICameraService):
                     if int(class_id) in vehicles:
                         print(f'vehicle detected {YoloModels(class_id).name} with score {score}')
                         croppedImage = frame[y1:y2, x1:x2]
-                        print(recognitionPlateService.GetTextPlateFromImage(croppedImage))
+                        licensePlate, licenseScore = recognitionPlateService.GetTextPlateFromImage(croppedImage)
+                        print(licensePlate, licenseScore)
 
         cap.release()
 
