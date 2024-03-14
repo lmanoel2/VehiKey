@@ -1,11 +1,17 @@
+import json
+
 from flask import make_response
-from Domain.Utils.ConverterUtils import ParseClassToJson
+from Domain.Utils.ConverterUtils import ParseClassToJson, ParseClassToDict
+
 
 class BaseController:
     @staticmethod
     def ReturnHttpOk(obj):
         if isinstance(obj, str):
             return make_response(obj, 200)
+        elif isinstance(obj, list):
+            json_message = [ParseClassToDict(item) for item in obj]
+            return make_response(json.dumps(json_message), 200)
         else:
             json_message = ParseClassToJson(obj)
             return make_response(json_message, 200)
