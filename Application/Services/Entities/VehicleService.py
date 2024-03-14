@@ -1,18 +1,23 @@
 from Application.Business.Entities.VehicleBusiness import VehicleBusiness
 from Domain.Entities.Vehicle import Vehicle
 from Domain.Interfaces.Services.Entities.IVehicleService import IVehicleService
+from Infra.Views.Request.VehicleRequestView import VehicleRequestView
 
 
 class VehicleService(IVehicleService):
+    business = VehicleBusiness()
+
     def Create(self, vehicle: Vehicle):
-        business = VehicleBusiness()
-        return business.Create(vehicle)
+        return self.business.Create(vehicle)
 
     def Get(self):
-        business = VehicleBusiness()
-        return business.Get()
+        return self.business.Get()
 
     def GetById(self, id: int):
-        business = VehicleBusiness()
-        return business.GetById(id)
+        return self.business.GetById(id)
 
+    def Update(self, id: int, model: VehicleRequestView):
+        return self.business.Update(id, model)
+
+    def DeleteById(self, id: int):
+        return self.business.DeleteById(id)

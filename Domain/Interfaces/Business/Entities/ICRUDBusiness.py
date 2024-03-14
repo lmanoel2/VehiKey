@@ -15,9 +15,13 @@ class ICRUDBusiness(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def Update(self, model):
+    def Update(self, id: int, model):
         pass
 
     @abstractmethod
     def Delete(self, model):
+        pass
+
+    @abstractmethod
+    def DeleteById(self, id: int):
         pass

@@ -35,7 +35,7 @@ class VehicleController(BaseController):
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))
 
     @staticmethod
-    @vehicleBlueprint.route('/', methods=['get'])
+    @vehicleBlueprint.route('/', methods=['GET'])
     def Get():
         try:
             service = VehicleService()
@@ -50,7 +50,7 @@ class VehicleController(BaseController):
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))
 
     @staticmethod
-    @vehicleBlueprint.route('/<int:id>', methods=['get'])
+    @vehicleBlueprint.route('/<int:id>', methods=['GET'])
     def GetById(id):
         try:
             service = VehicleService()
@@ -60,5 +60,41 @@ class VehicleController(BaseController):
             vehicleResponseView = VehicleResponseView(vehicle.id, vehicle.color, vehicle.plate) if vehicle else None
 
             return BaseController.ReturnHttpOk(vehicleResponseView)
+        except Exception as e:
+            return BaseController.ReturnHttpBadRequest(ExceptionView(e))
+
+    @staticmethod
+    @vehicleBlueprint.route('/<int:id>', methods=['PUT'])
+    def Update(id):
+        try:
+            service = VehicleService()
+            vehicleView = VehicleRequestView.parse_raw(request.data)
+
+            updatedVehicle = service.Update(id, vehicleView)
+
+            vehicleResponseView = VehicleResponseView(updatedVehicle.id, updatedVehicle.color, updatedVehicle.plate) if updatedVehicle else None
+
+            return BaseController.ReturnHttpOk(vehicleResponseView)
+        except ValidationError as e:
+            return BaseController.ReturnHttpNotAcceptable(MissingFieldsView(e))
+        except BaseException as e:
+            return BaseController.ReturnHttpNotAcceptable(ExceptionView(e))
+        except Exception as e:
+            return BaseController.ReturnHttpBadRequest(ExceptionView(e))
+
+    @staticmethod
+    @vehicleBlueprint.route('/<int:id>', methods=['DELETE'])
+    def DeleteById(id):
+        try:
+            service = VehicleService()
+
+            deletedVehicle = service.DeleteById(id)
+
+            vehicleResponseView = VehicleResponseView(deletedVehicle.id, deletedVehicle.color,
+                                                      deletedVehicle.plate) if deletedVehicle else None
+
+            return BaseController.ReturnHttpOk(vehicleResponseView)
+        except BaseException as e:
+            return BaseController.ReturnHttpNotAcceptable(ExceptionView(e))
         except Exception as e:
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))

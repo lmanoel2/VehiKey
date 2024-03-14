@@ -14,3 +14,7 @@ class IVehicleService(metaclass=ABCMeta):
     @abstractmethod
     def GetById(self, id:int):
         pass
+
+    @abstractmethod
+    def Update(self, id:int, model):
+        pass
