@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 from pydantic import ValidationError
 from Infra.Controllers.BaseController import BaseController
-from Infra.Controllers.CRUDController import CRUDController
 from Domain.DataBase.Context import Session
 from Domain.Entities.Vehicle import Vehicle
 from Infra.Views.Request.VehicleRequestView import VehicleRequestView
@@ -13,7 +12,7 @@ from Infra.Views.Response.VehicleResponseView import VehicleResponseView
 vehicleBlueprint = Blueprint('vehicle', __name__, url_prefix='/vehicle')
 
 
-class VehicleController(CRUDController):
+class VehicleController(BaseController):
     @staticmethod
     @vehicleBlueprint.route('/', methods=['POST'])
     def Create():
@@ -34,3 +33,22 @@ class VehicleController(CRUDController):
             return BaseController.ReturnHttpNotAcceptable(ExceptionView(e))
         except Exception as e:
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))
+
+    @staticmethod
+    @vehicleBlueprint.route('/', methods=['get'])
+    def Get():
+        try:
+            service = VehicleService()
+            service.Get()
+        except Exception as e:
+            return BaseController.ReturnHttpBadRequest(ExceptionView(e))
+
+    @staticmethod
+    @vehicleBlueprint.route('/<int:id>', methods=['get'])
+    def GetById(id):
+        service = VehicleService()
+        service.GetById()
+        session = Session()
+        red_vehicles = session.query(Vehicle).filter(Vehicle.color == 'vermelha').all()
+
+        print(red_vehicles)

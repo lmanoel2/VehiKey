@@ -8,3 +8,7 @@ class VehicleService(IVehicleService):
         business = VehicleBusiness()
         return business.Create(vehicle)
 
+    def Get(self):
+        business = VehicleBusiness()
+        return business.Get()
+

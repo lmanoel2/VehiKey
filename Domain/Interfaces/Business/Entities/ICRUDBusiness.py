@@ -7,7 +7,7 @@ class ICRUDBusiness(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def Get(self, id: int):
+    def Get(self):
         pass
 
     @abstractmethod
