@@ -11,6 +11,10 @@ class ICRUDBusiness(metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def GetById(self, id:int):
+        pass
+
+    @abstractmethod
     def Update(self, model):
         pass
 

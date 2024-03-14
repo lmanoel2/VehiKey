@@ -10,3 +10,7 @@ class IVehicleService(metaclass=ABCMeta):
     @abstractmethod
     def Get(self):
         pass
+
+    @abstractmethod
+    def GetById(self, id:int):
+        pass

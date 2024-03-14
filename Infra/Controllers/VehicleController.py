@@ -52,9 +52,13 @@ class VehicleController(BaseController):
     @staticmethod
     @vehicleBlueprint.route('/<int:id>', methods=['get'])
     def GetById(id):
-        service = VehicleService()
-        service.GetById()
-        session = Session()
-        red_vehicles = session.query(Vehicle).filter(Vehicle.color == 'vermelha').all()
+        try:
+            service = VehicleService()
 
-        print(red_vehicles)
+            vehicle = service.GetById(id)
+
+            vehicleResponseView = VehicleResponseView(vehicle.id, vehicle.color, vehicle.plate) if vehicle else None
+
+            return BaseController.ReturnHttpOk(vehicleResponseView)
+        except Exception as e:
+            return BaseController.ReturnHttpBadRequest(ExceptionView(e))

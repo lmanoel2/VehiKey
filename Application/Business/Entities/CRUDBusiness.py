@@ -6,7 +6,7 @@ T = TypeVar('T')
 
 class CRUDBusiness(Generic[T], ICRUDBusiness):
     Session = Session()
-    model: Type[T]  # Isso indica que 'model' será uma classe do tipo T
+    model: Type[T]
 
     def __init__(self, model: Type[T]):
         self.model = model
@@ -21,6 +21,9 @@ class CRUDBusiness(Generic[T], ICRUDBusiness):
 
     def Get(self):
         return self.Session.query(self.model).all()
+
+    def GetById(self, id:int):
+        return self.Session.query(self.model).filter(self.model.id == id).first()
 
     def Update(self, model):
         raise NotImplementedError()

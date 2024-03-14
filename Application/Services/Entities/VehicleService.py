@@ -12,3 +12,7 @@ class VehicleService(IVehicleService):
         business = VehicleBusiness()
         return business.Get()
 
+    def GetById(self, id: int):
+        business = VehicleBusiness()
+        return business.GetById(id)
+
