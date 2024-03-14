@@ -1,4 +1,4 @@
-class VehicleResponseView():
+class VehicleResponseView:
     id: int
     color: str
     plate: str

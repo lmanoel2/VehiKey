@@ -39,7 +39,13 @@ class VehicleController(BaseController):
     def Get():
         try:
             service = VehicleService()
-            service.Get()
+
+            vehicles = service.Get()
+
+            vehicleResponseViews = [VehicleResponseView(vehicle.id, vehicle.color, vehicle.plate)
+                                    for vehicle in vehicles]
+
+            return BaseController.ReturnHttpOk(vehicleResponseViews)
         except Exception as e:
             return BaseController.ReturnHttpBadRequest(ExceptionView(e))
 
