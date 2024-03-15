@@ -27,7 +27,7 @@ class CRUDBusiness(Generic[T], ICRUDBusiness):
     def GetById(self, id:int):
         return self.Session.query(self.model).filter(self.model.id == id).first()
 
-    def Update(self, id:int, updateData):
+    def Update(self, id: int, updateData):
         try:
             entity = self.GetById(id)
             updateData = ParseClassToDict(updateData)

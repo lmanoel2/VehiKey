@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from pydantic import ValidationError
+from Domain.Model.VehicleModel import VehicleModel
+from Domain.Utils.ConverterUtils import ParseObjectToClass, ParseModelToResponseView
 from Infra.Controllers.BaseController import BaseController
-from Domain.DataBase.Context import Session
 from Domain.Entities.Vehicle import Vehicle
 from Infra.Views.Request.VehicleRequestView import VehicleRequestView
 from Application.Services.Entities.VehicleService import VehicleService
@@ -20,11 +21,11 @@ class VehicleController(BaseController):
             service = VehicleService()
             vehicleView = VehicleRequestView.parse_raw(request.data)
 
-            newVehicle = Vehicle(color=vehicleView.color, plate=vehicleView.plate)
+            newVehicle = ParseObjectToClass(vehicleView, Vehicle)
 
             service.Create(newVehicle)
 
-            vehicleResponseView = VehicleResponseView(newVehicle.id, newVehicle.color, newVehicle.plate)
+            vehicleResponseView = ParseModelToResponseView(newVehicle, VehicleResponseView)
 
             return BaseController.ReturnHttpOk(vehicleResponseView)
         except ValidationError as e:
@@ -42,7 +43,7 @@ class VehicleController(BaseController):
 
             vehicles = service.Get()
 
-            vehicleResponseViews = [VehicleResponseView(vehicle.id, vehicle.color, vehicle.plate)
+            vehicleResponseViews = [ParseModelToResponseView(vehicle,VehicleResponseView)
                                     for vehicle in vehicles]
 
             return BaseController.ReturnHttpOk(vehicleResponseViews)
@@ -57,7 +58,7 @@ class VehicleController(BaseController):
 
             vehicle = service.GetById(id)
 
-            vehicleResponseView = VehicleResponseView(vehicle.id, vehicle.color, vehicle.plate) if vehicle else None
+            vehicleResponseView = ParseModelToResponseView(vehicle,VehicleResponseView) if vehicle else None
 
             return BaseController.ReturnHttpOk(vehicleResponseView)
         except Exception as e:
@@ -70,7 +71,9 @@ class VehicleController(BaseController):
             service = VehicleService()
             vehicleView = VehicleRequestView.parse_raw(request.data)
 
-            updatedVehicle = service.Update(id, vehicleView)
+            vehicle = VehicleModel(**vehicleView.dict())
+
+            updatedVehicle = service.Update(id, vehicle)
 
             vehicleResponseView = VehicleResponseView(updatedVehicle.id, updatedVehicle.color, updatedVehicle.plate) if updatedVehicle else None
 
@@ -90,8 +93,8 @@ class VehicleController(BaseController):
 
             deletedVehicle = service.DeleteById(id)
 
-            vehicleResponseView = VehicleResponseView(deletedVehicle.id, deletedVehicle.color,
-                                                      deletedVehicle.plate) if deletedVehicle else None
+            vehicleResponseView = ParseModelToResponseView(deletedVehicle, VehicleResponseView) \
+                if deletedVehicle else None
 
             return BaseController.ReturnHttpOk(vehicleResponseView)
         except BaseException as e:
