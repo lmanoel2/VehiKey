@@ -11,8 +11,11 @@ class VehicleBusiness(CRUDBusiness):
         self.__AlreadyExistePlate(model.plate)
         super().Create(model)
 
+    def GetByPlate(self, plate: str) -> Vehicle:
+        return self.Session.query(Vehicle).filter(Vehicle.plate == plate).first()
+
     def __AlreadyExistePlate(self, plate: str):
-        alreadyExistPlate = bool(self.Session.query(Vehicle).filter(Vehicle.plate == plate).first())
+        alreadyExistPlate = bool(self.GetByPlate(plate))
 
         if alreadyExistPlate:
             raise PlateAlreadyExistsError()
