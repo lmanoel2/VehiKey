@@ -10,5 +10,5 @@ class ImageConvertUtils:
 
     @staticmethod
     def ApplyThreshold(image):
-        _, thresh = cv2.threshold(image, 64, 255, cv2.THRESH_BINARY_INV)
+        _, thresh = cv2.threshold(image, 125, 255, cv2.THRESH_BINARY_INV)
         return thresh
