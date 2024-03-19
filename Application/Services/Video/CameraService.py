@@ -12,13 +12,13 @@ from Application.Services.Video.RecognitionPlateService import RecognitionPlateS
 class CameraService(ICameraService):
     maxFrame = 30
 
-    def StartStream(self, camera: Camera):
+    def StartStream(self):
         print("Starting video stream...")
         recognitionPlateService = RecognitionPlateService()
 
         vehicles = [YoloModels.MOTORCYCLE.value, YoloModels.BUS.value, YoloModels.CAR.value, YoloModels.TRUCK.value,
                     YoloModels]
-        rtspUrl = f'rtsp://{camera.user}:{camera.password}@{camera.ip}:554/cam/realmonitor?channel=1&subtype=0'
+        rtspUrl = f'rtsp://{self.camera.user}:{self.camera.password}@{self.camera.ip}:554/cam/realmonitor?channel=1&subtype=0'
         model = YOLO('yolov8n.pt')
 
         while True:
@@ -61,11 +61,14 @@ class CameraService(ICameraService):
                 print(licensePlate, licenseScore)
 
                 if licensePlate:
-                    accessControlService = AccessControlService()
+                    accessControlService = AccessControlService(self.camera)
                     accessControlService.ProcessPlate(licensePlate, licenseScore)
+
+    def __init__(self, camera: Camera):
+        self.camera = camera
 
 
 if __name__ == '__main__':
     camera = Camera('admin', 'admin123', '10.0.0.106')
-    cameraService = CameraService()
-    cameraService.StartStream(camera)
+    cameraService = CameraService(camera)
+    cameraService.StartStream()

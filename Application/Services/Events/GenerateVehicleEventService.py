@@ -7,14 +7,20 @@ from Domain.Entities.Event import Event
 class GenerateVehicleEventService(IGenerateVehicleEventService):
     business = EventBusiness()
 
-    def SendVehicleNotFound(self, plate: str):
+    def SendVehicleOK(self, plate: str):
+        print('Vehicle OK')
+        message = VehicleOk(plate=plate).json()
+        event = Event(message=message)
+        self.business.Create(event)
+
+    def SendVehicleNotFound(self):
         print('Vehicle not found')
         message = VehicleNotFound().json()
         event = Event(message=message)
         self.business.Create(event)
 
-    def SendVehicleOK(self, plate: str):
-        print('Vehicle OK')
-        message = VehicleOk().json()
+    def SendVehicleOutOfHour(self, plate: str):
+        print('Vehicle out of hour')
+        message = VehicleOutOfHour(plate=plate).json()
         event = Event(message=message)
         self.business.Create(event)
