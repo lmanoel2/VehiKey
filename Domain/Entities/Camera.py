@@ -14,7 +14,35 @@ class Camera(Base):
     user = Column(String(10), nullable=False)
     name = Column(String(30), nullable=False)
     manufacturer = Column(String(20), nullable=False)
-    access_time = Column(String(500), nullable=True)
+    valid_time = Column(String(50), nullable=True)
+
+    def GetValidTime(self):
+        if not self.valid_time:
+            return None, None
+
+        startDate, endDate = self.valid_time.split()
+        start = datetime.strptime(startDate, "%d-%m-%Y %H:%M")
+        end = datetime.strptime(endDate, "%d-%m-%Y %H:%M")
+
+        return start, end
+
+    def GetManufacturer(self):
+        return self.manufacturer
+
+    def GetName(self):
+        return self.name
+
+    def GetUser(self):
+        return self.user
+
+    def GetPassword(self):
+        return self.password
+
+    def GetPort(self):
+        return self.port
+
+    def GetIp(self):
+        return self.ip
 
     def __init__(self, user, password, ip, *args: Any, **kwargs: Any):
         super().__init__(*args, **kwargs)
