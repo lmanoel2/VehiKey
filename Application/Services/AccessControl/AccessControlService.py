@@ -18,15 +18,19 @@ class AccessControlService(IAccessControlService):
             self.generateVehicleEvent.SendVehicleNotFound()
             return
 
-        if not AccessControlService.CheckAccessPermissionToVehicle(vehicle):
+        if not AccessControlService.CheckAccessPermission(vehicle):
             self.generateVehicleEvent.SendVehicleOutOfHour(plate)
+            return
+
+        if not AccessControlService.CheckAccessPermission(self.camera):
+            self.generateVehicleEvent.SendVehicleWithCameraOutOfHour(plate)
             return
 
         self.generateVehicleEvent.SendVehicleOK(plate)
 
     @staticmethod
-    def CheckAccessPermissionToVehicle(vehicle: Vehicle):
-        start, end = vehicle.GetValidTime()
+    def CheckAccessPermission(entity):
+        start, end = entity.GetValidTime()
 
         if not AccessControlService.CheckValidTime(start, end):
             return False

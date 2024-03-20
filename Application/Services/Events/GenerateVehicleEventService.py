@@ -24,3 +24,9 @@ class GenerateVehicleEventService(IGenerateVehicleEventService):
         message = VehicleOutOfHour(plate=plate).json()
         event = Event(message=message)
         self.business.Create(event)
+
+    def SendVehicleWithCameraOutOfHour(self, plate: str):
+        print('Vehicle with camera out of hour')
+        message = VehicleWithCameraOutOfHour(plate=plate).json()
+        event = Event(message=message)
+        self.business.Create(event)

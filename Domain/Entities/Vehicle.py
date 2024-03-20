@@ -22,14 +22,14 @@ class Vehicle(Base):
         if not self.valid_time:
             return None, None
 
-        data_inicio, data_fim = self.valid_time.split()
-        start = datetime.strptime(data_inicio, "%d-%m-%Y %H:%M")
-        end = datetime.strptime(data_fim, "%d-%m-%Y %H:%M")
+        startDate, endDate = self.valid_time.split()
+        start = datetime.strptime(startDate, "%d-%m-%Y %H:%M")
+        end = datetime.strptime(endDate, "%d-%m-%Y %H:%M")
 
         return start, end
 
     def GetAccessTime(self):
         return self.access_time
 
-    def get_number_access(self):
+    def GetNumberAccess(self):
         return self.number_access

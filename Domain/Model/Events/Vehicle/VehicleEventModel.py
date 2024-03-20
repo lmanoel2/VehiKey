@@ -18,3 +18,9 @@ class VehicleOutOfHour(BaseModel):
     cmd: str = Cmd.ACCESS_VEHICLE.value
     code: int = Code.ACCESS_OUT_OF_HOUR.value[0]
     plate: str
+
+
+class VehicleWithCameraOutOfHour(BaseModel):
+    cmd: str = Cmd.ACCESS_VEHICLE.value
+    code: int = Code.ACCESS_WITH_CAMERA_OUT_OF_HOUR.value[0]
+    plate: str
