@@ -9,7 +9,7 @@ class IGenerateVehicleEventService(metaclass=ABCMeta):
 
 
     @abstractmethod
-    def SendVehicleNotFound(self):
+    def SendVehicleNotFound(self, plate: str):
         pass
 
     @abstractmethod

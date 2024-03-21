@@ -16,13 +16,16 @@ class Camera(Base):
     manufacturer = Column(String(20), nullable=False)
     valid_time = Column(String(50), nullable=True)
 
+    def SetValidTime(self, validTime: str):
+        self.valid_time = validTime
+
     def GetValidTime(self):
         if not self.valid_time:
             return None, None
 
         startDate, endDate = self.valid_time.split()
-        start = datetime.strptime(startDate, "%d-%m-%Y %H:%M").replace(tzinfo=timezone.utc)
-        end = datetime.strptime(endDate, "%d-%m-%Y %H:%M").replace(tzinfo=timezone.utc)
+        start = datetime.strptime(startDate, "%d-%m-%Y-%H:%M").replace(tzinfo=timezone.utc)
+        end = datetime.strptime(endDate, "%d-%m-%Y-%H:%M").replace(tzinfo=timezone.utc)
 
         return start, end
 

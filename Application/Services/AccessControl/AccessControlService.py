@@ -2,7 +2,6 @@ from datetime import datetime, timezone
 
 from Application.Services.Events.GenerateVehicleEventService import GenerateVehicleEventService
 from Domain.Entities.Camera import Camera
-from Domain.Entities.Vehicle import Vehicle
 from Domain.Interfaces.Services.AccessControl.IAccessControlService import IAccessControlService
 from Application.Business.Entities.VehicleBusiness import VehicleBusiness
 
@@ -15,7 +14,7 @@ class AccessControlService(IAccessControlService):
         vehicle = self.business.GetByPlate(plate)
 
         if not bool(vehicle):
-            self.generateVehicleEvent.SendVehicleNotFound()
+            self.generateVehicleEvent.SendVehicleNotFound(plate)
             return
 
         if not AccessControlService.CheckAccessPermission(vehicle):

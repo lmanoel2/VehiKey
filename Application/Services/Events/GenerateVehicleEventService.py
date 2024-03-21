@@ -13,9 +13,9 @@ class GenerateVehicleEventService(IGenerateVehicleEventService):
         event = Event(message=message)
         self.business.Create(event)
 
-    def SendVehicleNotFound(self):
-        print('Vehicle not found')
-        message = VehicleNotFound().json()
+    def SendVehicleNotFound(self, plate):
+        print(f'Vehicle not found {plate}')
+        message = VehicleNotFound(plate=plate).json()
         event = Event(message=message)
         self.business.Create(event)
 

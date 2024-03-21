@@ -12,6 +12,7 @@ class VehicleOk(BaseModel):
 class VehicleNotFound(BaseModel):
     cmd: str = Cmd.ACCESS_VEHICLE.value
     code: int = Code.ACCESS_NOT_FOUND_VEHICLE.value[0]
+    plate: str
 
 
 class VehicleOutOfHour(BaseModel):
