@@ -1,6 +1,6 @@
 from typing import Any
 from sqlalchemy import Column, Integer, String, DateTime
-from datetime import datetime
+from datetime import datetime, timezone
 from .Base import Base
 
 
@@ -21,8 +21,8 @@ class Camera(Base):
             return None, None
 
         startDate, endDate = self.valid_time.split()
-        start = datetime.strptime(startDate, "%d-%m-%Y %H:%M")
-        end = datetime.strptime(endDate, "%d-%m-%Y %H:%M")
+        start = datetime.strptime(startDate, "%d-%m-%Y %H:%M").replace(tzinfo=timezone.utc)
+        end = datetime.strptime(endDate, "%d-%m-%Y %H:%M").replace(tzinfo=timezone.utc)
 
         return start, end
 

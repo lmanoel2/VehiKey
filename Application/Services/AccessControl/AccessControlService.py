@@ -39,6 +39,9 @@ class AccessControlService(IAccessControlService):
 
     @staticmethod
     def CheckValidTime(start: datetime, end: datetime):
+        if not start or not end:
+            return True
+
         utcNow = datetime.now(timezone.utc)
         return start <= utcNow < end
 
