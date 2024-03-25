@@ -9,7 +9,7 @@ class Vehicle(Base):
     created_at = Column(DateTime(timezone=True), default=datetime.now)
     color = Column(String(10), nullable=True)
     plate = Column(String(10), nullable=False)
-    valid_time = Column(String(50), nullable=True)  # '19-03-2024 00:00 25-03-2024 00:00'
+    valid_time = Column(String(50), nullable=True)  # '19-03-2024-00:00 25-03-2024-00:00'
     access_time = Column(String(500), nullable=True)
     number_access = Column(Integer, nullable=True)
 
