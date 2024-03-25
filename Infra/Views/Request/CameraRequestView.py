@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class CameraModel(BaseModel):
+class CameraRequestView(BaseModel):
     ip: str
     port: int
     password: str

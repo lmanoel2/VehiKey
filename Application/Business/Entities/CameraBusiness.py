@@ -2,38 +2,38 @@ import re
 from datetime import datetime, timezone
 
 from Application.Business.Entities.CRUDBusiness import CRUDBusiness
-from Application.Exceptions.Entities.VehicleExceptions import PlateAlreadyExistsError
 from Application.Exceptions.Entities.BaseException import ValidTimeNotFormattedError
-from Domain.Entities.Vehicle import Vehicle
-from Domain.Model.VehicleModel import VehicleModel
+from Application.Exceptions.Entities.CameraExceptions import IpAlreadyExistsError
+from Domain.Entities.Camera import Camera
+from Domain.Model.CameraModel import CameraModel
 
 
-class VehicleBusiness(CRUDBusiness):
+class CameraBusiness(CRUDBusiness):
     def __init__(self):
-        super().__init__(Vehicle)
+        super().__init__(Camera)
 
-    def Create(self, model: Vehicle):
-        self.__AlreadyExistPlate(model.plate)
+    def Create(self, model: Camera):
+        self.__AlreadyExistIp(model.ip)
         self.__ValidateValidTime(model.valid_time)
         super().Create(model)
 
-    def Update(self, id: int, model: VehicleModel):
-        vehicle = self.GetById(id)
+    def Update(self, id: int, model: CameraModel):
+        camera = self.GetById(id)
 
-        if vehicle.plate != model.plate:
-            self.__AlreadyExistPlate(model.plate)
+        if camera.ip != model.ip:
+            self.__AlreadyExistIp(model.ip)
 
         self.__ValidateValidTime(model.valid_time)
         return super().Update(id, model)
 
-    def GetByPlate(self, plate: str) -> Vehicle:
-        return self.Session.query(Vehicle).filter(Vehicle.plate == plate).first()
+    def GetByIp(self, ip: str) -> Camera:
+        return self.Session.query(Camera).filter(Camera.ip == ip).first()
 
-    def __AlreadyExistPlate(self, plate: str):
-        alreadyExistPlate = bool(self.GetByPlate(plate))
+    def __AlreadyExistIp(self, ip: str):
+        alreadyExistIp = bool(self.GetByIp(ip))
 
-        if alreadyExistPlate:
-            raise PlateAlreadyExistsError()
+        if alreadyExistIp:
+            raise IpAlreadyExistsError()
 
     def __ValidateValidTime(self, validTime: str):
         if not validTime:

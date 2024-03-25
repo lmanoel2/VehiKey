@@ -46,9 +46,3 @@ class Camera(Base):
 
     def GetIp(self):
         return self.ip
-
-    def __init__(self, user, password, ip, *args: Any, **kwargs: Any):
-        super().__init__(*args, **kwargs)
-        self.ip = ip
-        self.user = user
-        self.password = password
