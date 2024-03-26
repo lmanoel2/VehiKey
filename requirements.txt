@@ -1,5 +1,6 @@
 alembic==1.13.1
 annotated-types==0.6.0
+bidict==0.23.1
 blinker==1.7.0
 certifi==2024.2.2
 cfgv==3.4.0
@@ -13,9 +14,11 @@ easyocr==1.7.1
 entities==1.0.0
 filelock==3.13.1
 Flask==3.0.2
+Flask-SocketIO==5.3.6
 fonttools==4.49.0
 fsspec==2024.2.0
 greenlet==3.0.3
+h11==0.14.0
 identify==2.5.35
 idna==3.6
 imageio==2.34.0
@@ -51,6 +54,8 @@ pyparsing==3.1.1
 pytest==8.0.1
 python-bidi==0.4.2
 python-dateutil==2.8.2
+python-engineio==4.9.0
+python-socketio==5.11.2
 pytz==2024.1
 PyYAML==6.0.1
 requests==2.31.0
@@ -59,6 +64,7 @@ scipy==1.12.0
 seaborn==0.13.2
 setuptools==69.1.0
 shapely==2.0.3
+simple-websocket==1.0.0
 six==1.16.0
 SQLAlchemy==1.4.51
 SQLAlchemy-Utils==0.41.1
@@ -74,3 +80,4 @@ ultralytics==8.1.17
 urllib3==2.2.1
 virtualenv==20.25.1
 Werkzeug==3.0.1
+wsproto==1.2.0
