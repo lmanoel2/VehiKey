@@ -12,7 +12,7 @@ streamBlueprint = Blueprint('stream', __name__, url_prefix='/stream')
 class StreamController(BaseController):
 
     @staticmethod
-    @streamBlueprint.route('/Connect', methods=['GET'])
+    @streamBlueprint.route('/connect', methods=['GET'])
     def Connect():
         try:
             service = StreamService()
