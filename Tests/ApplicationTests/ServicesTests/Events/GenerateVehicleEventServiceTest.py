@@ -10,6 +10,7 @@ def testSendVehicleOK(generateVehicleEventService):
     # Act
     generateVehicleEventService.SendVehicleOK(plate)
 
+
 @pytest.mark.parametrize("generateVehicleEventService", [GenerateVehicleEventService()])
 def testSendVehicleNotFound(generateVehicleEventService):
     # Arrange
@@ -17,4 +18,3 @@ def testSendVehicleNotFound(generateVehicleEventService):
 
     # Act
     generateVehicleEventService.SendVehicleNotFound(plate)
-

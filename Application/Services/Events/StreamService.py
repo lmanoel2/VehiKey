@@ -1,32 +1,49 @@
-import time
-import threading
+from datetime import datetime
+
 from flask import Response
 from Domain.Interfaces.Services.Events.IStreamService import IStreamService
+from Application.Business.Entities.EventBusiness import EventBusiness
 
 
 class StreamService(IStreamService):
+    EventBusiness = EventBusiness()
 
     def __init__(self):
-        self.boundary = "--boundary"
+        self.Boundary = "--boundary"
+        self.LastDateKeepAlive = datetime.now()
 
     def HandleConnect(self):
-        return Response(self.GenerateMessages(), content_type=f'multipart/mixed; boundary={self.boundary}')
+        return Response(self.GenerateMessages(), content_type=f'multipart/mixed; boundary={self.Boundary}')
 
     def GenerateMessages(self):
+        yield f"{self.Boundary}\n"
+        yield "Content-Type: application/json\n\n"
+        yield "Keep alive\n\n"
+
         while True:
-            # Aqui você pode chamar a função do seu serviço para obter mensagens em tempo real
-            message = "Nova mensagem em tempo real"
+            events = self.EventBusiness.GetEventsNotSent()
 
-            yield f"--{self.boundary}\n"
-            yield "Content-Type: application/json\n\n"
-            yield f"{message}\n\n"
+            for event in events:
+                if self.ShouldSendKeepAlive():
+                    yield f"{self.Boundary}\n"
+                    yield "Content-Type: application/json\n\n"
+                    yield "Keep alive\n\n"
 
-            time.sleep(10)  # Atraso de 1 segundo entre cada mensagem
+                yield f"--{self.Boundary}\n"
+                yield "Content-Type: application/json\n\n"
+                yield f"{event.message}\n\n"
 
-    def SendKeepAlive(self):
-        while True:
-            yield f"{self.boundary}\n"
-            yield "Content-Type: application/json\n\n"
-            yield "Keep alive\n\n"
+            if self.ShouldSendKeepAlive():
+                yield f"{self.Boundary}\n"
+                yield "Content-Type: application/json\n\n"
+                yield "Keep alive\n\n"
 
+    def ShouldSendKeepAlive(self):
+        t = datetime.now()
+        elapsedTime = t - self.LastDateKeepAlive
+        totalSe = elapsedTime.total_seconds()
+        if totalSe < 30:
+            return False
 
+        self.LastDateKeepAlive = datetime.now()
+        return True

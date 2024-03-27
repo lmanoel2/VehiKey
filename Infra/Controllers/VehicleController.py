@@ -43,7 +43,7 @@ class VehicleController(BaseController):
 
             vehicles = service.Get()
 
-            vehicleResponseViews = [ParseModelToResponseView(vehicle,VehicleResponseView)
+            vehicleResponseViews = [ParseModelToResponseView(vehicle, VehicleResponseView)
                                     for vehicle in vehicles]
 
             return BaseController.ReturnHttpOk(vehicleResponseViews)
