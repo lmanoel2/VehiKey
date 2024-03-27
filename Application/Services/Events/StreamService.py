@@ -39,10 +39,8 @@ class StreamService(IStreamService):
                 yield "Keep alive\n\n"
 
     def ShouldSendKeepAlive(self):
-        t = datetime.now()
-        elapsedTime = t - self.LastDateKeepAlive
-        totalSe = elapsedTime.total_seconds()
-        if totalSe < 30:
+        elapsedTime = datetime.now() - self.LastDateKeepAlive
+        if elapsedTime.total_seconds() < 30:
             return False
 
         self.LastDateKeepAlive = datetime.now()
