@@ -15,8 +15,8 @@ class CRUDBusiness(Generic[T], ICRUDBusiness):
 
     def Create(self, model):
         try:
-            self.Session.add(model)
-            #self.Session.commit()
+            with self.Session.begin():
+                self.Session.add(model)
         except Exception as e:
             self.Session.rollback()
             raise e
@@ -46,7 +46,8 @@ class CRUDBusiness(Generic[T], ICRUDBusiness):
                         value = getattr(updateData, key)
                         setattr(entity, key, value)
 
-            #self.Session.commit()
+            with self.Session.begin():
+                self.Session.commit()
 
             return entity
         except Exception as e:
@@ -63,7 +64,8 @@ class CRUDBusiness(Generic[T], ICRUDBusiness):
             if not entity:
                 return None
 
-            self.Session.delete(entity)
+            with self.Session.begin():
+                self.Session.delete(entity)
             #self.Session.commit()
             return entity
         except Exception as e:
