@@ -1,4 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'Cameras/Css/camera.css' %}">
+{% endblock %}
+
 {% block 'dashboard' %}
-<h1>Teste</h1>
+    <div class="container">
+        <div class="row">
+
+            <div class="col card-dashboard">
+                <p class="text-card">Adicionar cameras</p>
+            </div>
+
+            <div class="col card-dashboard">
+                <p class="text-card">Atualizar cameras</p>
+            </div>
+
+        </div>
+        <div id="adicionar-camera" class="adicionar-camera">
+                <form action="{% url 'camera' %}" method="POST">{% csrf_token %}
+
+                    <div class="add-cameras">
+                        <h3>Cameras</h3>
+                        <span class="btn-add-cameras" onclick="add_camera()">+ Adicionar camera</span>
+                        <div id="form-camera">
+                            {% for name, ip, port in cameras%}
+                                <br>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <input type='text' placeholder='nome' class='form-control' name='name' value="{{name}}">
+                                    </div>
+
+                                    <div class="col-md">
+                                        <input type='text' placeholder='ip' class='form-control' name='ip' value="{{ip}}">
+                                    </div>
+
+                                    <div class="col-md">
+                                        <input type='number' placeholder='porta' class='form-control' name='port' value="{{port}}">
+                                    </div>
+
+                                </div>
+                            {% endfor%}
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <input type="submit" value="Cadastrar" class="btn-principal">
+
+                </form>
+
+            </div>
+    </div>
+    <script src="{% static 'Cameras/Js/camera.js' %}"></script>
 {% endblock %}
