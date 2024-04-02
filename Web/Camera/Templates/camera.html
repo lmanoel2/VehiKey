@@ -25,19 +25,19 @@
                         <h3>Cameras</h3>
                         <span class="btn-add-cameras" onclick="add_camera()">+ Adicionar camera</span>
                         <div id="form-camera">
-                            {% for name, ip, port in cameras%}
+                            {% for camera in cameras%}
                                 <br>
                                 <div class="row">
                                     <div class="col-md">
-                                        <input type='text' placeholder='nome' class='form-control' name='name' value="{{name}}">
+                                        <input type='text' placeholder='nome' class='form-control' name='name' value="{{camera.name}}">
                                     </div>
 
                                     <div class="col-md">
-                                        <input type='text' placeholder='ip' class='form-control' name='ip' value="{{ip}}">
+                                        <input type='text' placeholder='ip' class='form-control' name='ip' value="{{camera.ip}}">
                                     </div>
 
                                     <div class="col-md">
-                                        <input type='number' placeholder='porta' class='form-control' name='port' value="{{port}}">
+                                        <input type='number' placeholder='porta' class='form-control' name='port' value="{{camera.port}}">
                                     </div>
 
                                 </div>
