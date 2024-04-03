@@ -15,9 +15,7 @@ def camera(request):
     cameraEndpoints = CameraEndpoints()
 
     if request.method == 'GET':
-        print('request.GET')
         cameras = cameraEndpoints.GetAllCameras()
-        print(cameras)
         return render(request, 'camera.html', {'cameras': cameras})
     if request.method == 'POST':
         names = request.POST.getlist('name')

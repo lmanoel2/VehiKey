@@ -1,5 +1,4 @@
 .card-dashboard{
-
     background-color: var(--main-color);
     width: 50%;
     margin-left: 10px;
@@ -7,22 +6,17 @@
     text-align: center;
     padding: 20px;
     cursor: pointer;
-
 }
 
 .text-card{
-
     font-size: 25px;
-
 }
 
 .btn-add-cameras{
-
     background-color: var(--contrast-color);
     padding: 5px;
     font-weight: bold;
     cursor: pointer;
-
 }
 
 .btn-principal{
@@ -34,11 +28,9 @@
 }
 
 #att_camera{
-
     display: none;
 }
 
 #form-att-camera{
     display: none;
-
 }
