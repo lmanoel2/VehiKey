@@ -33,9 +33,6 @@ function dados_camera(){
     }).then(function (result){
         return result.json()
     }).then(function (data){
-        console.log(data)
-        console.log(data['name'])
-
         document.getElementById("form-att-camera").style.display = 'block'
         document.getElementById('name').value = data['name']
         document.getElementById('ip').value = data['ip']

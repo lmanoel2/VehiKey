@@ -1,10 +1,11 @@
-import requests, json, os, sys
+import json
+import os
+import requests
+import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
 sys.path.append(project_dir)
-
-from Infra.Views.Response.CameraResponseView import CameraResponseView
 
 
 class CameraEndpoints:
