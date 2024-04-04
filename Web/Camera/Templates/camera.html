@@ -51,11 +51,21 @@
 
         <div id="att_camera">
             <p></p>
-            <select id="client-select" onchange="dados_camera()" class="form-control">
+            <select id="camera-select" onchange="dados_camera()" class="form-control">
                 {% for camera in cameras%}
                     <option value="{{camera.id}}">{{camera.name}}</option>
                 {% endfor %}
             </select>
+            <br>
+            <hr>
+            <div id="form-att-camera">
+                <p>Nome</p>
+                <input type='text' placeholder='nome' class='form-control' id='name'>
+                <p>Ip</p>
+                <input type='text' placeholder='ip' class='form-control' id='ip'>
+                <p>Porta</p>
+                <input type='text' placeholder='porta' class='form-control' id='port'>
+            </div>
         </div>
 
     </div>

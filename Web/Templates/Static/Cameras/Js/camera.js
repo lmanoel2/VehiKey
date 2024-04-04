@@ -18,23 +18,29 @@ function exibir_form(tipo){
 }
 
 function dados_camera(){
-    console.log('Cheguei em dados camera')
-    const camera = document.getElementById("client-select")
-    const data = {
-        "ip":"10.7.7.146",
-        "port": 80,
-        "user": "admin",
-        "password": "admin123",
-        "name": "Camera bancada",
-        "manufacturer": "INTELBRAS"
-    }
+    const camera = document.getElementById("camera-select")
+    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
+    let data = new FormData()
 
-    fetch('http://127.0.0.1:5000/camera/2', {
-        method: "PUT",
+    data.append('id_camera', camera.value)
+
+    fetch('update_camera/', {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': csrf_token.value
+        },
         body: data
     }).then(function (result){
         return result.json()
     }).then(function (data){
         console.log(data)
+        console.log(data['name'])
+
+        document.getElementById("form-att-camera").style.display = 'block'
+        document.getElementById('name').value = data['name']
+        document.getElementById('ip').value = data['ip']
+        document.getElementById('password').value = data['password']
+        document.getElementById('port').value = data['port']
+        document.getElementById('user').value = data['user']
     })
 }

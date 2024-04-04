@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-import os, sys
+import os
+import sys
+
 import requests
+from django.http import JsonResponse
+from django.shortcuts import render
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
@@ -10,10 +12,10 @@ sys.path.append(project_dir)
 from Web.Endpoints.CameraEndpoints import CameraEndpoints
 from Domain.Model.CameraModel import CameraModel
 
+cameraEndpoints = CameraEndpoints()
+
 
 def camera(request):
-    cameraEndpoints = CameraEndpoints()
-
     if request.method == 'GET':
         cameras = cameraEndpoints.GetAllCameras()
         return render(request, 'camera.html', {'cameras': cameras})
@@ -34,3 +36,9 @@ def camera(request):
             requests.post(url, json=data)
 
         return render(request, 'camera.html', {'cameras': zip(names, ips, ports)})
+
+
+def update_camera(request):
+    cam_id = request.POST.get('id_camera')
+    cam = cameraEndpoints.GetCameraById(cam_id)
+    return JsonResponse(cam)

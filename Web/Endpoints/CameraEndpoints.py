@@ -13,5 +13,10 @@ class CameraEndpoints:
     def GetAllCameras(self):
         responseString = (requests.get(self.url)).content.decode('utf-8')
         data = json.loads(responseString)
-        cameras = [CameraResponseView(**item) for item in data]
-        return cameras
+        return data
+
+    def GetCameraById(self, id: int):
+        urlFormatted = f"{self.url}/{id}"
+        responseString = (requests.get(urlFormatted)).content.decode('utf-8')
+        data = json.loads(responseString)
+        return data
