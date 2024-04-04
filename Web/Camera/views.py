@@ -38,7 +38,7 @@ def camera(request):
         return render(request, 'camera.html', {'cameras': zip(names, ips, ports)})
 
 
-def update_camera(request):
+def get_camera(request):
     cam_id = request.POST.get('id_camera')
     cam = cameraEndpoints.GetCameraById(cam_id)
     return JsonResponse(cam)

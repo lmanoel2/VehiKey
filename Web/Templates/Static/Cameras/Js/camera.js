@@ -24,7 +24,7 @@ function dados_camera(){
 
     data.append('id_camera', camera.value)
 
-    fetch('update_camera/', {
+    fetch('get_camera/', {
         method: "POST",
         headers: {
           'X-CSRFToken': csrf_token.value
