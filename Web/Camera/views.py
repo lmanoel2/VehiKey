@@ -23,14 +23,16 @@ def camera(request):
         names = request.POST.getlist('name')
         ips = request.POST.getlist('ip')
         ports = request.POST.getlist('port')
+        users = request.POST.getlist('user')
+        passwords = request.POST.getlist('password')
         url = 'http://127.0.0.1:5000/camera'
 
-        for name, ip, port in zip(names, ips, ports):
+        for name, ip, port, user, password in zip(names, ips, ports, users, passwords):
             model = CameraModel(name=name,
                                 ip=ip,
                                 port=port,
-                                user='admin',
-                                password='admin123',
+                                user=user,
+                                password=password,
                                 manufacturer='INTELBRAS')
             data = dict(model)
             requests.post(url, json=data)
