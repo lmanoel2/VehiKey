@@ -1,7 +1,14 @@
-function add_camera(){
-    const container = document.getElementById('form-camera')
-    const html = "<br> <div class='row'> <div class='col'> <input type='text' placeholder='nome' class='form-control' name='name'></div> <div class='col'> <input type='text' placeholder='ip' class='form-control' name='ip'> </div> <div class='col'> <input type='number' placeholder='porta' class='form-control' name='port'> </div> </div>"
-    container.innerHTML += html
+function add_camera() {
+    let original = document.getElementById('form-camera');
+    let clone = original.cloneNode(true);
+
+    clone.querySelector("input[name='name']").value = '';
+    clone.querySelector("input[name='ip']").value = '';
+    clone.querySelector("input[name='port']").value = '';
+    clone.querySelector("input[name='user']").value = '';
+    clone.querySelector("input[name='password']").value = '';
+
+    original.parentNode.appendChild(clone);
 }
 
 function exibir_form(tipo){
