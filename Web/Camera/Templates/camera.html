@@ -40,6 +40,14 @@
                                     <input type='number' placeholder='porta' class='form-control' name='port' value="{{camera.port}}">
                                 </div>
 
+                                <div class="col-md">
+                                    <input type='text' placeholder='usuário' class='form-control' name='user' value="{{camera.user}}">
+                                </div>
+
+                                <div class="col-md">
+                                    <input type='password' placeholder='senha' class='form-control' name='password' value="{{camera.password}}">
+                                </div>
+
                             </div>
                         {% endfor%}
                     </div>
@@ -65,10 +73,10 @@
                 <input type='text' placeholder='ip' class='form-control' id='ip'>
                 <p>Porta</p>
                 <input type='text' placeholder='porta' class='form-control' id='port'>
-                <p>Senha</p>
-                <input type='password' placeholder='senha' class='form-control' id='password'>
                 <p>Usuário</p>
                 <input type='text' placeholder='usuário' class='form-control' id='user'>
+                <p>Senha</p>
+                <input type='password' placeholder='senha' class='form-control' id='password'>
             </div>
             <span id="btn-edit-cameras" class="btn-edit-cameras" onclick="update_camera()">Salvar</span>
         </div>
