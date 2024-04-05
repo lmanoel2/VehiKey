@@ -42,3 +42,8 @@ def get_camera(request):
     cam_id = request.POST.get('id_camera')
     cam = cameraEndpoints.GetCameraById(cam_id)
     return JsonResponse(cam)
+
+def update_camera(request):
+    cam_id = request.POST.get('id_camera')
+    cam = cameraEndpoints.GetCameraById(cam_id)
+    return JsonResponse(cam)
