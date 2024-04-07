@@ -1,7 +1,6 @@
 import os
 import sys
 
-import requests
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -10,7 +9,6 @@ project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
 sys.path.append(project_dir)
 
 from Web.Endpoints.CameraEndpoints import CameraEndpoints
-from Domain.Model.CameraModel import CameraModel
 
 cameraEndpoints = CameraEndpoints()
 
@@ -20,24 +18,9 @@ def camera(request):
         cameras = cameraEndpoints.GetAllCameras()
         return render(request, 'camera.html', {'cameras': cameras})
     if request.method == 'POST':
-        names = request.POST.getlist('name')
-        ips = request.POST.getlist('ip')
-        ports = request.POST.getlist('port')
-        users = request.POST.getlist('user')
-        passwords = request.POST.getlist('password')
-        url = 'http://127.0.0.1:5000/camera'
-
-        for name, ip, port, user, password in zip(names, ips, ports, users, passwords):
-            model = CameraModel(name=name,
-                                ip=ip,
-                                port=port,
-                                user=user,
-                                password=password,
-                                manufacturer='INTELBRAS')
-            data = dict(model)
-            requests.post(url, json=data)
-
-        return render(request, 'camera.html', {'cameras': zip(names, ips, ports)})
+        cameraEndpoints.AddRange(request)
+        cameras = cameraEndpoints.GetAllCameras()
+        return render(request, 'camera.html', {'cameras': cameras})
 
 
 def get_camera(request):
