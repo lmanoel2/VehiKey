@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'Vehicles/Css/vehicle.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+
+    <div class="container">
+
+        <div class="row">
+            <div onclick="display_form('1')" class="col card-dashboard">
+                <p class="text-card">Adicionar veículo</p>
+            </div>
+
+            <div onclick="display_form('2')" class="col card-dashboard">
+                <p class="text-card">Atualizar veículos</p>
+            </div>
+
+        </div>
+
+        <div id="add-vehicle" class="add-vehicle">
+            <form action="{% url 'vehicle' %}" method="POST">{% csrf_token %}
+                <div class="add-vehicles">
+                    <h3>Veículos</h3>
+                    <span class="btn-add-vehicles" onclick="add_vehicle()">+ Adicionar veículo</span>
+                    <div id="form-vehicle">
+                            <br>
+                            <div class="row">
+                                <div class="col-md">
+                                    <input type='text' placeholder='placa' class='form-control' name='plate' value="{{vehicle.plate}}">
+                                </div>
+
+                                <div class="col-md">
+                                    <input type='text' placeholder='cor' class='form-control' name='color' value="{{vehicle.color}}">
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Cadastrar" class="btn-principal">
+            </form>
+        </div>
+
+        <div id="att_vehicle">
+            <p></p>
+            <select id="vehicle-select" onchange="vehicle_data()" class="form-control">
+                {% for vehicle in vehicles%}
+                    <option value="{{vehicle.id}}">{{vehicle.plate}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <hr>
+            <div id="form-att-vehicle">
+                <p>Placa</p>
+                <input type='text' placeholder='placa' class='form-control' id='plate'>
+                <p>Cor</p>
+                <input type='text' placeholder='cor' class='form-control' id='color'>
+            </div>
+            <span id="btn-edit-vehicles" class="btn-edit-vehicles" onclick="update_vehicle()">Salvar</span>
+        </div>
+    </div>
+    <script src="{% static 'Vehicles/Js/vehicle.js' %}"></script>
+
+{% endblock %}
