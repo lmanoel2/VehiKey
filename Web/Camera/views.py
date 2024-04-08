@@ -1,7 +1,7 @@
 import os
 import sys
 
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -28,11 +28,9 @@ def get_camera(request):
     cam = cameraEndpoints.GetCameraById(cam_id)
     return JsonResponse(cam)
 
+
 def update_camera(request):
     cam_id = request.POST.get('id_camera')
     cam = cameraEndpoints.GetCameraById(cam_id)
     return JsonResponse(cam)
 
-def video(request):
-    print('VIDEO!!!!')
-    return HttpResponse("Video acessado com sucesso")
