@@ -2,11 +2,17 @@
   display: flex;
   align-items: center; /* Centraliza verticalmente */
   justify-content: center; /* Centraliza horizontalmente */
-  height: 100vh;
+  height: 20vh;
+  flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+#video_form {
+  display: block; /* Define os elementos como blocos para ficarem um embaixo do outro */
+  margin-bottom: 20px;
 }
 
 #video_camera {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 10%;
@@ -18,4 +24,16 @@
   width: 800px;
   height: 400px;
   object-fit: cover;
+  display: block; /* Define os elementos como blocos para ficarem um embaixo do outro */
 }
+
+
+
+/*.form-control{*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  height: 100%;*/
+/*  font-size: 14px;*/
+/*  position: absolute;*/
+/*}*/
+

@@ -16,6 +16,17 @@
     </script>
 
     <div class="container">
+
+        <div id="video_form">
+            <form id="camera-form" action="{% url 'stream' %}" method="POST">{% csrf_token %}
+                <select id="camera-select" name="camera_id" class="form-control" onchange="submitForm()">
+                    {% for camera in cameras%}
+                        <option value="{{camera}}">{{camera.name}}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
         <div id="video_camera">
 	        <img src="{% url 'stream' %}" alt="Vídeo ao Vivo">
         </div>
