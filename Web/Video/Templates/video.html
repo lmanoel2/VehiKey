@@ -4,3 +4,20 @@
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'Videos/Css/video.css' %}">
 {% endblock %}
+
+
+
+{% block 'dashboard' %}
+    <script>
+        setInterval(function() {
+            fetch('keep-alive');
+        }, 10); // Envia um sinal a cada 5 segundos
+    </script>
+    <div class="container">
+        <div id="video_camera">
+	        <img src="{% url 'stream' %}" alt="Vídeo ao Vivo">
+        </div>
+    </div>
+    <script src="{% static 'Videos/Js/video.js' %}"></script>
+{% endblock %}
+
