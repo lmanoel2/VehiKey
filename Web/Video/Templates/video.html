@@ -8,11 +8,13 @@
 
 
 {% block 'dashboard' %}
+
     <script>
         setInterval(function() {
             fetch('keep-alive');
-        }, 10); // Envia um sinal a cada 5 segundos
+        }, 10);
     </script>
+
     <div class="container">
         <div id="video_camera">
 	        <img src="{% url 'stream' %}" alt="Vídeo ao Vivo">

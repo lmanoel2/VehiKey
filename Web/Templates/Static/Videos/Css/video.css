@@ -1,51 +1,21 @@
-.card-dashboard{
-    background-color: var(--main-color);
-    width: 50%;
-    margin-left: 10px;
-    margin-top: 40px;
-    text-align: center;
-    padding: 20px;
-    cursor: pointer;
+.container {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  height: 100vh;
 }
 
-.text-card{
-    font-size: 25px;
+#video_camera {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
 }
 
-.btn-add-videos{
-    background-color: var(--contrast-color);
-    padding: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn-edit-videos{
-    display: none;
-    justify-content: center; /
-    align-items: center;
-    background-color: var(--contrast-color);
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.btn-principal{
-    color:white;
-    border: none;
-    background-color: var(--dark-color);
-    padding: 5px;
-    font-size: 30px;
-}
-
-#att_video{
-    display: none;
-}
-
-#form-att-video{
-    display: none;
+#video_camera img {
+  border: 5px solid var(--main-color);
+  border-radius: 10px;
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
 }
