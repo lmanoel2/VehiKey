@@ -12,14 +12,14 @@
     <script>
         setInterval(function() {
             fetch('keep-alive');
-        }, 10);
+        }, 500);
     </script>
 
     <div class="container">
 
-        <div id="video_form">
-            <form id="camera-form" action="{% url 'stream' %}" method="POST">{% csrf_token %}
-                <select id="camera-select" name="camera_id" class="form-control" onchange="submitForm()">
+        <div id="video_form">{% csrf_token %}
+            <form id="camera-form">
+                <select id="camera-select" name="camera" class="form-control" onchange="changeCam()">
                     {% for camera in cameras%}
                         <option value="{{camera}}">{{camera.name}}</option>
                     {% endfor %}
@@ -30,6 +30,7 @@
         <div id="video_camera">
 	        <img src="{% url 'stream' %}" alt="Vídeo ao Vivo">
         </div>
+
     </div>
     <script src="{% static 'Videos/Js/video.js' %}"></script>
 {% endblock %}
