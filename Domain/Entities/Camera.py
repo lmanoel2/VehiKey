@@ -16,6 +16,14 @@ class Camera(Base):
     manufacturer = Column(String(20), nullable=False)
     valid_time = Column(String(50), nullable=True)
 
+    def __init__(self, user: str, password: str, ip: str, name: str = 'default', manufacturer: str = 'unknown', port: int = 80):
+        self.user = user
+        self.password = password
+        self.ip = ip
+        self.name = name
+        self.manufacturer = manufacturer
+        self.port = port
+
     def SetValidTime(self, validTime: str):
         self.valid_time = validTime
 
