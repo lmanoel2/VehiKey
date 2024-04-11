@@ -24,6 +24,9 @@ class Camera(Base):
         self.manufacturer = manufacturer
         self.port = port
 
+    def __init__(self):
+        pass
+
     def SetValidTime(self, validTime: str):
         self.valid_time = validTime
 
