@@ -46,6 +46,7 @@ function dados_camera(){
     }).then(function (data){
         document.getElementById("form-att-camera").style.display = 'block'
         document.getElementById("btn-edit-cameras").style.display = 'block'
+        document.getElementById("btn-delete-cameras").style.display = 'block'
         document.getElementById('name').value = data['name']
         document.getElementById('ip').value = data['ip']
         document.getElementById('password').value = data['password']
@@ -82,5 +83,29 @@ function update_camera(){
     }).then(function (result){
         return result.json()
     }).then(function (data){
+    })
+}
+
+function delete_camera(){
+    let data = new FormData()
+    const camera_select = document.getElementById("camera-select")
+    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
+
+    let camera_string = camera_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const camera_json = JSON.parse(camera_string)
+
+    data.append('id_camera', camera_json.id)
+
+    fetch('delete_camera/', {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': csrf_token.value
+        },
+        body: data
+    }).then(function (result){
+        document.getElementById("btn-edit-cameras").style.display = 'none'
+        document.getElementById("btn-delete-cameras").style.display = 'none'
+        document.getElementById('form-att-camera').style.display = 'none'
+        return result.json()
     })
 }

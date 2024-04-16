@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,4 +35,10 @@ def update_camera(request):
     camera_json = json.loads(camera)
     cam = cameraEndpoints.UpdateCamera(camera_json)
     return JsonResponse(cam)
+
+
+def delete_camera(request):
+    camera_id = request.POST.get('id_camera')
+    cameraEndpoints.DeleteCamera(camera_id)
+    return HttpResponse(status=200)
 

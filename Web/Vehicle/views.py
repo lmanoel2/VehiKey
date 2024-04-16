@@ -29,14 +29,15 @@ def get_vehicle(request):
     vehicle = vehicleEndpoints.GetVehicleById(vehicle_id)
     return JsonResponse(vehicle)
 
+
 def update_vehicle(request):
     vehicle = request.POST.get('vehicle')
     vehicle_json = json.loads(vehicle)
     vehicle = vehicleEndpoints.UpdateVehicle(vehicle_json)
     return JsonResponse(vehicle)
 
+
 def delete_vehicle(request):
     vehicle_id = request.POST.get('id_vehicle')
     vehicleEndpoints.DeleteVehicle(vehicle_id)
     return HttpResponse(status=200)
-

@@ -38,6 +38,10 @@ class CameraEndpoints:
 
         return dataPut
 
+    def DeleteCamera(self, id: int):
+        urlFormatted = f"{self.url}/{id}"
+        requests.delete(urlFormatted)
+
     def AddRange(self, request):
         names = request.POST.getlist('name')
         ips = request.POST.getlist('ip')

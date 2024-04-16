@@ -19,11 +19,16 @@
     cursor: pointer;
 }
 
+.buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
 .btn-edit-cameras{
     display: none; /* Torna o elemento um container flexível */
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
     align-items: center; /* Centraliza o conteúdo verticalmente */
-    background-color: var(--contrast-color);
+    background-color: #396e1b;
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -32,6 +37,21 @@
     margin-right: auto;
     margin-top: 20px; /* Espaço vazio em cima */
     margin-bottom: 20px; /* Espaço vazio em baixo */
+}
+
+.btn-delete-cameras{
+    display: none;
+    justify-content: center; /
+    align-items: center;
+    background-color: #b94545;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .btn-principal{
