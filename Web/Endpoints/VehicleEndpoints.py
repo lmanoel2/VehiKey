@@ -24,6 +24,16 @@ class VehicleEndpoints:
         data = json.loads(responseString)
         return data
 
+    def UpdateVehicle(self, dataPut):
+        urlFormatted = f"{self.url}/{dataPut['id']}"
+        print(dataPut)
+        model = VehicleModel(color=dataPut['color'],
+                             plate=dataPut['plate'])
+        data = dict(model)
+        requests.put(urlFormatted, json=data)
+
+        return dataPut
+
     def AddRange(self, request):
         colors = request.POST.getlist('color')
         plates = request.POST.getlist('plate')

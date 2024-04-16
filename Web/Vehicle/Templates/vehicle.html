@@ -48,7 +48,7 @@
             <p></p>
             <select id="vehicle-select" onchange="vehicle_data()" class="form-control">
                 {% for vehicle in vehicles%}
-                    <option value="{{vehicle.id}}">{{vehicle.plate}}</option>
+                    <option value="{{vehicle}}">{{vehicle.plate}}</option>
                 {% endfor %}
             </select>
             <br>

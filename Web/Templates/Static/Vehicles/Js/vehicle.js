@@ -27,7 +27,11 @@ function vehicle_data(){
     const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
     let data = new FormData()
 
-    data.append('id_vehicle', vehicle.value)
+    let vehicle_string = vehicle.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const vehicle_json = JSON.parse(vehicle_string)
+
+
+    data.append('id_vehicle', vehicle_json.id)
 
     fetch('get_vehicle/', {
         method: "POST",
@@ -38,7 +42,6 @@ function vehicle_data(){
     }).then(function (result){
         return result.json()
     }).then(function (data){
-        console.log(data)
         document.getElementById("form-att-vehicle").style.display = 'block'
         document.getElementById("btn-edit-vehicles").style.display = 'block'
         document.getElementById('plate').value = data['plate']
@@ -47,26 +50,29 @@ function vehicle_data(){
 }
 
 function update_vehicle(){
-    const vehicle = document.getElementById("vehicle-select")
-    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
     let data = new FormData()
-    console.log('cheguei em update_vehicle!')
-    // data.append('id_vehicle', vehicle.value)
-    //
-    // fetch('get_vehicle/', {
-    //     method: "POST",
-    //     headers: {
-    //       'X-CSRFToken': csrf_token.value
-    //     },
-    //     body: data
-    // }).then(function (result){
-    //     return result.json()
-    // }).then(function (data){
-    //     document.getElementById("form-att-vehicle").style.display = 'block'
-    //     document.getElementById('name').value = data['name']
-    //     document.getElementById('ip').value = data['ip']
-    //     document.getElementById('password').value = data['password']
-    //     document.getElementById('port').value = data['port']
-    //     document.getElementById('user').value = data['user']
-    // })
+    const vehicle_select = document.getElementById("vehicle-select")
+    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
+
+    let vehicle = {};
+    vehicle.plate = document.getElementById('plate').value
+    vehicle.color = document.getElementById('color').value
+
+    let vehicle_string = vehicle_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const vehicle_json = JSON.parse(vehicle_string)
+
+    vehicle.id = vehicle_json.id
+    console.log(vehicle)
+
+    data.append('vehicle', JSON.stringify(vehicle))
+
+    fetch('update_vehicle/', {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': csrf_token.value
+        },
+        body: data
+    }).then(function (result){
+        return result.json()
+    })
 }

@@ -71,10 +71,8 @@ function update_camera(){
 
     camera.id = camera_json.id
 
-    console.log(camera)
-
     data.append('camera', JSON.stringify(camera))
-    console.log(JSON.stringify(camera))
+
     fetch('update_camera/', {
         method: "POST",
         headers: {
@@ -84,11 +82,5 @@ function update_camera(){
     }).then(function (result){
         return result.json()
     }).then(function (data){
-        // document.getElementById("form-att-camera").style.display = 'block'
-        // document.getElementById('name').value = camera_json['name']
-        // document.getElementById('ip').value = data['ip']
-        // document.getElementById('password').value = data['password']
-        // document.getElementById('port').value = data['port']
-        // document.getElementById('user').value = data['user']
     })
 }

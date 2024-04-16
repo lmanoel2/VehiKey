@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -30,6 +31,7 @@ def get_vehicle(request):
 
 
 def update_vehicle(request):
-    cam_id = request.POST.get('id_vehicle')
-    cam = vehicleEndpoints.GetVehicleById(cam_id)
-    return JsonResponse(cam)
+    vehicle = request.POST.get('vehicle')
+    vehicle_json = json.loads(vehicle)
+    vehicle = vehicleEndpoints.UpdateVehicle(vehicle_json)
+    return JsonResponse(vehicle)
