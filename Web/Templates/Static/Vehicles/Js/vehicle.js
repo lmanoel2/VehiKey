@@ -95,6 +95,9 @@ function delete_vehicle(){
         },
         body: data
     }).then(function (result){
+        document.getElementById("btn-edit-vehicles").style.display = 'none'
+        document.getElementById("btn-delete-vehicles").style.display = 'none'
+        document.getElementById('form-att-vehicle').style.display = 'none'
         return result.json()
     })
 }
