@@ -24,6 +24,20 @@ class CameraEndpoints:
         data = json.loads(responseString)
         return data
 
+    def UpdateCamera(self, dataPut):
+        urlFormatted = f"{self.url}/{dataPut['id']}"
+
+        model = CameraModel(name=dataPut['name'],
+                            ip=dataPut['ip'],
+                            port=dataPut['port'],
+                            user=dataPut['user'],
+                            password=dataPut['password'],
+                            manufacturer='INTELBRAS')
+        data = dict(model)
+        requests.put(urlFormatted, json=data)
+
+        return dataPut
+
     def AddRange(self, request):
         names = request.POST.getlist('name')
         ips = request.POST.getlist('ip')

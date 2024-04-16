@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -30,7 +31,8 @@ def get_camera(request):
 
 
 def update_camera(request):
-    cam_id = request.POST.get('id_camera')
-    cam = cameraEndpoints.GetCameraById(cam_id)
+    camera = request.POST.get('camera')
+    camera_json = json.loads(camera)
+    cam = cameraEndpoints.UpdateCamera(camera_json)
     return JsonResponse(cam)
 

@@ -30,7 +30,10 @@ function dados_camera(){
     const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
     let data = new FormData()
 
-    data.append('id_camera', camera.value)
+    let camera_string = camera.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const camera_json = JSON.parse(camera_string)
+
+    data.append('id_camera', camera_json.id)
 
     fetch('get_camera/', {
         method: "POST",
@@ -52,26 +55,40 @@ function dados_camera(){
 }
 
 function update_camera(){
-    const camera = document.getElementById("camera-select")
-    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
     let data = new FormData()
-    console.log('cheguei em update_camera!')
-    // data.append('id_camera', camera.value)
-    //
-    // fetch('get_camera/', {
-    //     method: "POST",
-    //     headers: {
-    //       'X-CSRFToken': csrf_token.value
-    //     },
-    //     body: data
-    // }).then(function (result){
-    //     return result.json()
-    // }).then(function (data){
-    //     document.getElementById("form-att-camera").style.display = 'block'
-    //     document.getElementById('name').value = data['name']
-    //     document.getElementById('ip').value = data['ip']
-    //     document.getElementById('password').value = data['password']
-    //     document.getElementById('port').value = data['port']
-    //     document.getElementById('user').value = data['user']
-    // })
+    const camera_select = document.getElementById("camera-select")
+    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
+
+    let camera = {};
+    camera.port = document.getElementById('port').value
+    camera.ip = document.getElementById('ip').value
+    camera.name = document.getElementById('name').value
+    camera.user = document.getElementById('user').value
+    camera.password = document.getElementById('password').value
+
+    let camera_string = camera_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const camera_json = JSON.parse(camera_string)
+
+    camera.id = camera_json.id
+
+    console.log(camera)
+
+    data.append('camera', JSON.stringify(camera))
+    console.log(JSON.stringify(camera))
+    fetch('update_camera/', {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': csrf_token.value
+        },
+        body: data
+    }).then(function (result){
+        return result.json()
+    }).then(function (data){
+        // document.getElementById("form-att-camera").style.display = 'block'
+        // document.getElementById('name').value = camera_json['name']
+        // document.getElementById('ip').value = data['ip']
+        // document.getElementById('password').value = data['password']
+        // document.getElementById('port').value = data['port']
+        // document.getElementById('user').value = data['user']
+    })
 }
