@@ -44,6 +44,7 @@ function vehicle_data(){
     }).then(function (data){
         document.getElementById("form-att-vehicle").style.display = 'block'
         document.getElementById("btn-edit-vehicles").style.display = 'block'
+        document.getElementById("btn-delete-vehicles").style.display = 'block'
         document.getElementById('plate').value = data['plate']
         document.getElementById('color').value = data['color']
     })
@@ -67,6 +68,27 @@ function update_vehicle(){
     data.append('vehicle', JSON.stringify(vehicle))
 
     fetch('update_vehicle/', {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': csrf_token.value
+        },
+        body: data
+    }).then(function (result){
+        return result.json()
+    })
+}
+
+function delete_vehicle(){
+    let data = new FormData()
+    const vehicle_select = document.getElementById("vehicle-select")
+    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]')
+
+    let vehicle_string = vehicle_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const vehicle_json = JSON.parse(vehicle_string)
+
+    data.append('id_vehicle', vehicle_json.id)
+
+    fetch('delete_vehicle/', {
         method: "POST",
         headers: {
           'X-CSRFToken': csrf_token.value

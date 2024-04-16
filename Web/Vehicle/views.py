@@ -25,13 +25,18 @@ def vehicle(request):
 
 
 def get_vehicle(request):
-    cam_id = request.POST.get('id_vehicle')
-    cam = vehicleEndpoints.GetVehicleById(cam_id)
-    return JsonResponse(cam)
-
+    vehicle_id = request.POST.get('id_vehicle')
+    vehicle = vehicleEndpoints.GetVehicleById(vehicle_id)
+    return JsonResponse(vehicle)
 
 def update_vehicle(request):
     vehicle = request.POST.get('vehicle')
     vehicle_json = json.loads(vehicle)
     vehicle = vehicleEndpoints.UpdateVehicle(vehicle_json)
     return JsonResponse(vehicle)
+
+def delete_vehicle(request):
+    vehicle_id = request.POST.get('id_vehicle')
+    vehicleEndpoints.DeleteVehicle(vehicle_id)
+    return HttpResponse(status=200)
+

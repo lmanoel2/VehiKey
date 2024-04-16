@@ -12,6 +12,11 @@
     font-size: 25px;
 }
 
+.buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
 .btn-add-vehicles{
     background-color: var(--contrast-color);
     padding: 5px;
@@ -23,7 +28,22 @@
     display: none;
     justify-content: center; /
     align-items: center;
-    background-color: var(--contrast-color);
+    background-color: #396e1b;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-delete-vehicles{
+    display: none;
+    justify-content: center; /
+    align-items: center;
+    background-color: #b94545;
     padding: 10px;
     font-weight: bold;
     cursor: pointer;

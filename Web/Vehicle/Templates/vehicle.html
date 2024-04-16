@@ -59,7 +59,11 @@
                 <p>Cor</p>
                 <input type='text' placeholder='cor' class='form-control' id='color'>
             </div>
-            <span id="btn-edit-vehicles" class="btn-edit-vehicles" onclick="update_vehicle()">Salvar</span>
+            <div class="buttons-container">
+                <span id="btn-edit-vehicles" class="btn-edit-vehicles" onclick="update_vehicle()">Salvar</span>
+                <span id="btn-delete-vehicles" class="btn-delete-vehicles" onclick="delete_vehicle()">Excluir</span>
+            </div>
+
         </div>
     </div>
     <script src="{% static 'Vehicles/Js/vehicle.js' %}"></script>
