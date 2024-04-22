@@ -31,7 +31,6 @@ class ClientMqtt(IPubSubService):
         client.on_message = on_message
 
     def Publish(self, message: str):
-        print(f"Send {message} to topic `{self.TopicToPublish}`")
         result = self.Client.publish(self.TopicToPublish, message)
         status = result[0]
         if status == 0:
@@ -44,8 +43,6 @@ class ClientMqtt(IPubSubService):
         self.Client = self.ConnectMqtt()
         self.Client.loop_start()
         self.Subscribe(self.Client)
-
-
 
 
 clientPubSub = ClientMqtt()
