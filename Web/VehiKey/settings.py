@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'Camera',
     'Vehicle',
     'Video',
+    'Control',
 ]
 
 MIDDLEWARE = [

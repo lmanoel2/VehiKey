@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'Controls/Css/control.css' %}">
+{% endblock %}
+
+
+{% block 'dashboard' %}
+    <div id="context-data"
+     data-cameras="{{ cameras|safe }}"
+     data-csrf-token="{{ csrf_token }}">
+    </div>
+
+    <div class="container">{% csrf_token %}
+        <select id="camera-select" onchange="select_camera()" class="form-control">
+            {% for camera in cameras%}
+                <option value="{{camera}}">{{camera.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <hr>
+        <div class="buttons-container">
+            <span id="btn-open-hardware" class="btn-open-hardware" onclick="open_door()">Pulsar</span>
+            <span id="btn-keep-hardware" class="btn-keep-hardware" onclick="keep_door()">Manter Aberto</span>
+            <span id="btn-close-hardware" class="btn-close-hardware" onclick="close_door()">Fechar</span>
+        </div>
+    </div>
+    <script src="{% static 'Controls/Js/control.js' %}"></script>
+{% endblock %}

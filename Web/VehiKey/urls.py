@@ -6,4 +6,5 @@ urlpatterns = [
     path('Camera/', include('Camera.urls')),
     path('Vehicle/', include('Vehicle.urls')),
     path('Video/', include('Video.urls')),
+    path('Control/', include('Control.urls')),
 ]
