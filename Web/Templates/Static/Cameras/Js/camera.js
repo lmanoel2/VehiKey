@@ -15,14 +15,28 @@ function add_camera() {
 function exibir_form(tipo){
     const addCamera = document.getElementById('adicionar-camera')
     const attCamera = document.getElementById('att_camera')
+    const camera_select = document.getElementById("camera-select")
+    let camera_string = camera_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const camera_json = JSON.parse(camera_string)
 
     if (tipo === "1"){
         attCamera.style.display = "none"
         attCamera.style.display = "none"
+
         addCamera.style.display = "block"
     } else if(tipo === "2"){
         attCamera.style.display = "block"
         addCamera.style.display = "none"
+
+        document.getElementById("form-att-camera").style.display = 'block'
+        document.getElementById("btn-edit-cameras").style.display = 'block'
+        document.getElementById("btn-delete-cameras").style.display = 'block'
+        document.getElementById('name').value = camera_json.name
+        document.getElementById('ip').value = camera_json.ip
+        document.getElementById('password').value = camera_json.password
+        document.getElementById('port').value = camera_json.port
+        document.getElementById('user').value = camera_json.user
+        document.getElementById('controller').value = camera_json.controller
     }
 }
 

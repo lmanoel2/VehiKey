@@ -6,7 +6,6 @@ function select_camera(){
 
 
 function open_door(){
-    console.log('OPEN')
     const camera_select = document.getElementById("camera-select")
     let contextDataElement = document.getElementById('context-data');
     let csrfToken = contextDataElement.dataset.csrfToken;
@@ -15,7 +14,6 @@ function open_door(){
 
     let camera_string = camera_select.value.replace(/None/g, 'null').replaceAll("'", '"');
     const camera_json = JSON.parse(camera_string)
-
 
     let json_data = {
         action: 'open',

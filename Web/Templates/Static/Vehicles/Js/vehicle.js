@@ -11,14 +11,23 @@ function add_vehicle() {
 function display_form(tipo){
     const addVehicle = document.getElementById('add-vehicle')
     const attVehicle = document.getElementById('att_vehicle')
-
+    const vehicle_select = document.getElementById("vehicle-select")
+    let vehicle_string = vehicle_select.value.replace(/None/g, 'null').replaceAll("'", '"');
+    const vehicle_json = JSON.parse(vehicle_string)
     if (tipo === "1"){
         attVehicle.style.display = "none"
         attVehicle.style.display = "none"
+
         addVehicle.style.display = "block"
     } else if(tipo === "2"){
         attVehicle.style.display = "block"
         addVehicle.style.display = "none"
+
+        document.getElementById("form-att-vehicle").style.display = 'block'
+        document.getElementById("btn-edit-vehicles").style.display = 'block'
+        document.getElementById("btn-delete-vehicles").style.display = 'block'
+        document.getElementById('plate').value = vehicle_json.plate
+        document.getElementById('color').value = vehicle_json.color
     }
 }
 
