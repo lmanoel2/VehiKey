@@ -7,6 +7,7 @@ function add_camera() {
     clone.querySelector("input[name='port']").value = '';
     clone.querySelector("input[name='user']").value = '';
     clone.querySelector("input[name='password']").value = '';
+    clone.querySelector("input[name='controller']").value = '';
 
     original.parentNode.appendChild(clone);
 }
@@ -52,6 +53,7 @@ function dados_camera(){
         document.getElementById('password').value = data['password']
         document.getElementById('port').value = data['port']
         document.getElementById('user').value = data['user']
+        document.getElementById('controller').value = data['controller']
     })
 }
 
@@ -66,12 +68,12 @@ function update_camera(){
     camera.name = document.getElementById('name').value
     camera.user = document.getElementById('user').value
     camera.password = document.getElementById('password').value
+    camera.controller = document.getElementById('controller').value
 
     let camera_string = camera_select.value.replace(/None/g, 'null').replaceAll("'", '"');
     const camera_json = JSON.parse(camera_string)
 
     camera.id = camera_json.id
-
     data.append('camera', JSON.stringify(camera))
 
     fetch('update_camera/', {

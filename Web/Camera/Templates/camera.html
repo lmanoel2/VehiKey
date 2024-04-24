@@ -47,6 +47,10 @@
                                     <input type='password' placeholder='senha' class='form-control' name='password' value="{{camera.password}}">
                                 </div>
 
+                                <div class="col-md">
+                                    <input type='text' placeholder='serial control' class='form-control' name='controller' value="{{camera.controller}}">
+                                </div>
+
                             </div>
                     </div>
                 </div>
@@ -75,6 +79,8 @@
                 <input type='text' placeholder='usuário' class='form-control' id='user'>
                 <p>Senha</p>
                 <input type='password' placeholder='senha' class='form-control' id='password'>
+                <p>Serial do Controlador</p>
+                <input type='text' placeholder='controller' class='form-control' id='controller'>
             </div>
             <div class="buttons-container">
                 <span id="btn-edit-cameras" class="btn-edit-cameras" onclick="update_camera()">Salvar</span>

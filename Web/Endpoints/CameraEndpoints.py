@@ -32,6 +32,7 @@ class CameraEndpoints:
                             port=dataPut['port'],
                             user=dataPut['user'],
                             password=dataPut['password'],
+                            controller=dataPut['controller'],
                             manufacturer='INTELBRAS')
         data = dict(model)
         requests.put(urlFormatted, json=data)
@@ -48,14 +49,16 @@ class CameraEndpoints:
         ports = request.POST.getlist('port')
         users = request.POST.getlist('user')
         passwords = request.POST.getlist('password')
+        controllers = request.POST.getlist('controller')
 
-        for name, ip, port, user, password in zip(names, ips, ports, users, passwords):
+        for name, ip, port, user, password, controller in zip(names, ips, ports, users, passwords, controllers):
             model = CameraModel(name=name,
                                 ip=ip,
                                 port=port,
                                 user=user,
                                 password=password,
-                                manufacturer='INTELBRAS')
+                                manufacturer='INTELBRAS',
+                                controller=controller)
             data = dict(model)
             requests.post(self.url, json=data)
 
