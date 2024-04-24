@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
@@ -26,7 +27,9 @@ def control(request):
         cameras = cameraEndpoints.GetAllCameras()
         return render(request, 'control.html', {'cameras': cameras})
 
+
 def send_command(request):
-    action = request.POST.get('action')
-    controlsEndpoints.SendCommand(action)
+    control = request.POST.get('control')
+    control_json = json.loads(control)
+    controlsEndpoints.SendCommand(control_json)
     return JsonResponse('ok', safe=False)

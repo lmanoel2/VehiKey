@@ -13,9 +13,9 @@ sys.path.append(project_dir)
 class ControlsEndpoints:
     url = 'http://127.0.0.1:5000/pubsub'
 
-    def SendCommand(self, action):
+    def SendCommand(self, data):
         urlFormatted = f"{self.url}/publish"
 
-        requests.post(urlFormatted, data=action)
+        requests.post(urlFormatted, json=data)
 
         return '{"status": "success"}'

@@ -15,6 +15,7 @@ class Camera(Base):
     name = Column(String(30), nullable=False)
     manufacturer = Column(String(20), nullable=False)
     valid_time = Column(String(50), nullable=True)
+    controller = Column(String(50), nullable=True)
 
     def __init__(self, user: str = None, password: str = None, ip: str = None, name: str = 'default',                 manufacturer: str = 'unknown', port: int = 80):
         if user is not None and password is not None and ip is not None:

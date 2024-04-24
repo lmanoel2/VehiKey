@@ -30,13 +30,14 @@ class ClientMqtt(IPubSubService):
         client.subscribe(self.TopicToSubscribe)
         client.on_message = on_message
 
-    def Publish(self, message: str):
-        result = self.Client.publish(self.TopicToPublish, message)
+    def Publish(self, message: str, topic_suffix: str):
+        topicToPublishJoined = f"{self.TopicToPublish}/{topic_suffix}"
+        result = self.Client.publish(topicToPublishJoined, message)
         status = result[0]
         if status == 0:
-            print(f"Send {message} to topic `{self.TopicToPublish}`")
+            print(f"Send {message} to topic `{topicToPublishJoined}`")
         else:
-            print(f"Failed to send message to topic {self.TopicToPublish}")
+            print(f"Failed to send message to topic {topicToPublishJoined}")
 
     def Start(self):
         print('Starting MQTT...')

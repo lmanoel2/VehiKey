@@ -10,3 +10,4 @@ class CameraRequestView(BaseModel):
     name: str
     manufacturer: str
     valid_time: Optional[str] = None
+    controller: Optional[str] = None

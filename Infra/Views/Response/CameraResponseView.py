@@ -7,8 +7,9 @@ class CameraResponseView:
     name: str
     manufacturer: str
     valid_time: str
+    controller: str
 
-    def __init__(self, id: int, ip: str, port: str, password: str, user: str, name: str, manufacturer: str, valid_time: str = None):
+    def __init__(self, id: int, ip: str, port: str, password: str, user: str, name: str, manufacturer: str, valid_time: str = None, controller: str = None):
         self.id = id
         self.ip = ip
         self.port = port
@@ -17,3 +18,4 @@ class CameraResponseView:
         self.name = name
         self.manufacturer = manufacturer
         self.valid_time = valid_time
+        self.controller = controller
