@@ -1,9 +1,8 @@
 .container {
-  display: flex;
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-  height: 20vh;
-  flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 #video_form {
@@ -27,6 +26,50 @@
   display: block; /* Define os elementos como blocos para ficarem um embaixo do outro */
 }
 
+
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.buttons-container span {
+    background-color: #2f4b28;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    border-radius: 22px ;
+    text-align: center;
+    transition: background-color 0.3s;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex: 1; /* Faz com que cada botão ocupe espaço igual no container */
+}
+
+.btn-open-hardware:hover, .btn-keep-hardware:hover, .btn-close-hardware:hover {
+    background-color: #81782f; /* Muda a cor de fundo quando o mouse está sobre o botão */
+    color: #fff; /* Muda a cor do texto para branco */
+}
+
+.btn-open-hardware{
+
+}
+
+.btn-keep-hardware{
+
+}
+
+.btn-close-hardware{
+
+}
 
 
 /*.form-control{*/
