@@ -31,7 +31,5 @@ def changed_cam(request):
 @gzip.gzip_page
 def stream(request):
     camera = request.POST.get('camera')
-    print("STREAM!")
-    print(camera)
     cameraService.start()
     return StreamingHttpResponse(cameraService.get_video(), content_type="multipart/x-mixed-replace;boundary=frame")
