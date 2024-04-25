@@ -1,11 +1,13 @@
 from paho.mqtt import client as mqtt_client
 
+from Application.Services.Events.SaveEventService import SaveEventService
 from Domain.Interfaces.Services.PubSub.IPubSubService import IPubSubService
 
 
 class ClientMqtt(IPubSubService):
+    SaveEventService = SaveEventService()
     TopicToPublish = "VehiKey/Subscribe"
-    TopicToSubscribe = "VehiKey/Publish"
+    TopicToSubscribe = "VehiKey/Publish/#"
     Broker = 'broker.emqx.io'
     Port = 1883
     ClientId = 'python-mqtt-23123123122'
@@ -26,6 +28,8 @@ class ClientMqtt(IPubSubService):
     def Subscribe(self, client: mqtt_client):
         def on_message(client, userdata, msg):
             print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+            serialNumber = msg.topic.split("/")[-1]
+            self.SaveEventService.SaveEvent(msg.payload.decode(), serialNumber)
 
         client.subscribe(self.TopicToSubscribe)
         client.on_message = on_message

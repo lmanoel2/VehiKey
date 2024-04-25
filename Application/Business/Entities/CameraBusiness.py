@@ -29,6 +29,9 @@ class CameraBusiness(CRUDBusiness):
     def GetByIp(self, ip: str) -> Camera:
         return self.Session.query(Camera).filter(Camera.ip == ip).first()
 
+    def GetByController(self, controller: str) -> Camera:
+        return self.Session.query(Camera).filter(Camera.controller == controller).first()
+
     def __AlreadyExistIp(self, ip: str):
         alreadyExistIp = bool(self.GetByIp(ip))
 
