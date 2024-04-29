@@ -31,7 +31,7 @@ class StreamService(IStreamService):
 
                 yield f"--{self.Boundary}\n"
                 yield "Content-Type: application/json\n\n"
-                yield f"{event.message}\n\n"
+                yield f"{event['message']}\n\n"
 
             if self.ShouldSendKeepAlive():
                 yield f"{self.Boundary}\n"

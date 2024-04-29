@@ -12,9 +12,25 @@ class EventBusiness(CRUDBusiness):
         super().Create(model)
 
     def GetEventsNotSent(self) -> List[Event]:
-        events = self.Session.query(Event).filter(Event.sent_to_server == 0).all()
-        self.SetEventsToSent(events)
-        return events
+        connection = self.Session.bind.raw_connection()
+
+        try:
+            cursor = connection.cursor(dictionary=True)
+            query = "SELECT * FROM event WHERE sent_to_server = 0"
+            cursor.execute(query)
+            events = cursor.fetchall()
+            cursor.close()
+
+            if events:
+                update_query = "UPDATE event SET sent_to_server = 1 WHERE sent_to_server = 0"
+                cursor = connection.cursor()
+                cursor.execute(update_query)
+                connection.commit()
+                cursor.close()
+
+            return events
+        finally:
+            connection.close()
 
     def SetEventsToSent(self, events: List[Event]):
         for event in events:
