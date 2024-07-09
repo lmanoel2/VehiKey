@@ -20,9 +20,9 @@ RegisterBlueprints(app)
 
 clientPubSub.Start()
 
-# camera = Camera('admin','admin123','10.0.0.106')
-# cameraService = CameraService(camera)
-# cameraService.StartStream()
+camera = Camera('admin','admin123','10.0.0.106')
+cameraService = CameraService(camera)
+cameraService.StartStream()
 
 if __name__ == '__main__':
     app.run(debug=False)
