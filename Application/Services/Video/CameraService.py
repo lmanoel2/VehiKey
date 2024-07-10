@@ -35,7 +35,7 @@ class CameraService(ICameraService):
                 print("Error receiving frame")
                 break
 
-            self.__ProcessFrame(frame, model, recognitionPlateService, vehicles)
+            self.ProcessFrame(frame, model, recognitionPlateService, vehicles)
 
             cap.release()
             time.sleep(1)
@@ -45,7 +45,7 @@ class CameraService(ICameraService):
         cv2.imshow('Frame', frame)
         cv2.waitKey(1)
 
-    def __ProcessFrame(self, frame, model, recognitionPlateService, vehicles):
+    def ProcessFrame(self, frame, model, recognitionPlateService, vehicles):
         #self.PrintFrame(frame)  # Retire o comentario para ver o video em tempo real
         detectionsVehicles = model(frame, verbose=False)[0]
         for detectionsVehicle in detectionsVehicles.boxes.data.tolist():
@@ -57,6 +57,8 @@ class CameraService(ICameraService):
 
             if int(class_id) in vehicles:
                 croppedImage = frame[y1:y2, x1:x2]
+                #self.PrintFrame(croppedImage)
+
                 licensePlate, licenseScore = recognitionPlateService.GetTextPlateFromImage(croppedImage)
                 print(licensePlate, licenseScore)
 
