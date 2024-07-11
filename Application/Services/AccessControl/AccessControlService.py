@@ -10,22 +10,22 @@ class AccessControlService(IAccessControlService):
     business = VehicleBusiness()
     generateVehicleEvent = GenerateVehicleEventService()
 
-    def ProcessPlate(self, plate: str, plateScore: float):
+    def ProcessPlate(self, plate: str, plateScore: float, color: str):
         vehicle = self.business.GetByPlate(plate)
 
         if not bool(vehicle):
-            self.generateVehicleEvent.SendVehicleNotFound(plate)
+            self.generateVehicleEvent.SendVehicleNotFound(plate, color)
             return
 
         if not AccessControlService.CheckAccessPermission(vehicle):
-            self.generateVehicleEvent.SendVehicleOutOfHour(plate)
+            self.generateVehicleEvent.SendVehicleOutOfHour(plate, color)
             return
 
         if not AccessControlService.CheckAccessPermission(self.camera):
-            self.generateVehicleEvent.SendVehicleWithCameraOutOfHour(plate)
+            self.generateVehicleEvent.SendVehicleWithCameraOutOfHour(plate, color)
             return
 
-        self.generateVehicleEvent.SendVehicleOK(plate)
+        self.generateVehicleEvent.SendVehicleOK(plate, color)
 
     @staticmethod
     def CheckAccessPermission(entity):

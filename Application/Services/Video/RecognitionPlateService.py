@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 from Domain.Interfaces.Services.Video.IRecognitionPlateService import IRecognitionPlateService
 from Application.Utils.Images.ImageConvertUtils import ImageConvertUtils
@@ -73,9 +74,11 @@ class RecognitionPlateService(IRecognitionPlateService):
             x4 = int(round(bbox[3][0]))
             y4 = int(round(bbox[3][1]))
             x_min = min(x1, x2, x3, x4)
-            y_min = min(y1, y2, y3, y4) + 12
+            y_min = min(y1, y2, y3, y4)
             x_max = max(x1, x2, x3, x4)
             y_max = max(y1, y2, y3, y4)
+            x_min = int(round(x_min + (5/100)*(x_max-x_min)))
+            y_min = int(round(y_min + (8/100)*(y_max-y_min)))
 
             license_plate_crop_improved = license_plate_crop[y_min:y_max, x_min:x_max]
             license_plate_crop_improved = ImageConvertUtils.ApplyThresholdInv(license_plate_crop_improved, 0)

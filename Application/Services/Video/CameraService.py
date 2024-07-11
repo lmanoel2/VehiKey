@@ -3,6 +3,7 @@ import time
 from ultralytics import YOLO
 
 from Application.Services.AccessControl.AccessControlService import AccessControlService
+from Application.Services.Video.ColorService import ColorService
 from Domain.Entities.Camera import Camera
 from Domain.Interfaces.Services.Video.ICameraService import ICameraService
 from Domain.Enumerators.Recognition.YoloModels import YoloModels
@@ -46,6 +47,7 @@ class CameraService(ICameraService):
         cv2.waitKey(1)
 
     def ProcessFrame(self, frame, model, recognitionPlateService, vehicles):
+        colorService = ColorService()
         #self.PrintFrame(frame)  # Retire o comentario para ver o video em tempo real
         detectionsVehicles = model(frame, verbose=False)[0]
         for detectionsVehicle in detectionsVehicles.boxes.data.tolist():
@@ -63,8 +65,9 @@ class CameraService(ICameraService):
                 print(licensePlate, licenseScore)
 
                 if licensePlate:
+                    color = colorService.GetColorFromImage(croppedImage)
                     accessControlService = AccessControlService(self.camera)
-                    accessControlService.ProcessPlate(licensePlate, licenseScore)
+                    accessControlService.ProcessPlate(licensePlate, licenseScore, color)
 
     def __init__(self, camera: Camera):
         self.camera = camera
